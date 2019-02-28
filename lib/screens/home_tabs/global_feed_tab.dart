@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realworld/components/cards.dart';
 
 class GlobalFeedTab extends StatelessWidget {
   @override
@@ -15,16 +16,11 @@ class GlobalFeedTab extends StatelessWidget {
         key: PageStorageKey<String>("global_feed"),
         slivers: <Widget>[
           SliverPadding(
-            padding: EdgeInsets.all(0.0),
-            sliver: SliverFixedExtentList(
-              itemExtent: 50.0,
+            padding: EdgeInsets.all(5.0),
+            sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return Container(
-                    alignment: Alignment.center,
-                    color: Colors.lightBlue[100 * (index % 9)],
-                    child: Text('list item $index'),
-                  );
+                  return Cards.article();
                 },
               ),
             ),
