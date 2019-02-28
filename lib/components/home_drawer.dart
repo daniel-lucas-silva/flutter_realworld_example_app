@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class FavoritedTab extends StatelessWidget {
+class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Drawer(
+      child: Container(),
+    );
   }
 }
