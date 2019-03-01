@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/components/cards.dart';
+import 'package:realworld/screens/article_screen.dart';
 
 class GlobalFeedTab extends StatelessWidget {
   @override
@@ -20,7 +21,16 @@ class GlobalFeedTab extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return Cards.article();
+                  return GestureDetector(
+                    onTapUp: (_) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ArticleScreen()),
+                      );
+                    },
+                    child: Cards.article(),
+                  );
                 },
               ),
             ),
