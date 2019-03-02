@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/components.dart';
 
 class Cards {
-  static Card article({onOpenProfile}) {
+  static Card article() {
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -10,19 +9,14 @@ class Cards {
           Container(
             padding: EdgeInsets.all(10.0),
             decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.black12,
-                ),
-              ),
-            ),
+                border: Border(
+                    bottom: BorderSide(
+              color: Colors.black12,
+            ))),
             child: Row(
               children: <Widget>[
-                GestureDetector(
-                  onTapUp: onOpenProfile,
-                  child: CircleAvatar(
-                    radius: 24.0,
-                  ),
+                CircleAvatar(
+                  radius: 24.0,
                 ),
                 Expanded(
                   child: Padding(
@@ -40,10 +34,11 @@ class Cards {
                     ),
                   ),
                 ),
-                RwButton.favorite(
-                  count: 1,
+                OutlineButton.icon(
                   onPressed: () {},
-                  loading: false,
+                  icon: Icon(Icons.favorite_border),
+                  label: Text("0"),
+                  padding: EdgeInsets.all(0.0),
                 ),
               ],
             ),

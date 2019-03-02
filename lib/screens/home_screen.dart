@@ -10,8 +10,8 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
-
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   PageController _pageController;
   int _index;
 
@@ -32,10 +32,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Conduite", style: TextStyle(
-           fontFamily: "Titillium",
-           fontWeight: FontWeight.w700
-        ),),
+        title: Text(
+          "Conduite",
+          style:
+              TextStyle(fontFamily: "Titillium", fontWeight: FontWeight.w700),
+        ),
         centerTitle: true,
       ),
       drawer: HomeDrawer(),
@@ -61,31 +62,33 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   Align _tabBar() {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: CupertinoTabBar(
-        onTap: _onTap,
-        currentIndex: _index,
-        backgroundColor: Colors.white54,
-        inactiveColor: Colors.black54,
-        activeColor: Colors.lightGreen[700],
-        iconSize: 24.0,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.public),
-            title: Text('Global Feed'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_add),
-            title: Text('Your Feed'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            title: Text('Profile'),
-          ),
-        ],
-      ),
-    );
+    return MediaQuery.of(context).viewInsets.bottom == 0
+        ? Align(
+            alignment: Alignment.bottomCenter,
+            child: CupertinoTabBar(
+              onTap: _onTap,
+              currentIndex: _index,
+              backgroundColor: Colors.white54,
+              inactiveColor: Colors.black54,
+              activeColor: Colors.lightGreen[700],
+              iconSize: 24.0,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.public),
+                  title: Text('Global Feed'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person_add),
+                  title: Text('Your Feed'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle),
+                  title: Text('Profile'),
+                ),
+              ],
+            ),
+          )
+        : Align();
   }
 
   void _onTap(int tab) {

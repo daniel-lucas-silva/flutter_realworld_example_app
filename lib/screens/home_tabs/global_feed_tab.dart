@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/components/cards.dart';
 import 'package:realworld/screens/article_screen.dart';
+import 'package:realworld/screens/profile_screen.dart';
 
 class GlobalFeedTab extends StatelessWidget {
   @override
@@ -26,10 +27,20 @@ class GlobalFeedTab extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ArticleScreen()),
+                          builder: (context) => ArticleScreen(),
+                        ),
                       );
                     },
-                    child: Cards.article(),
+                    child: Cards.article(
+                      onOpenProfile: (_) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfileScreen(),
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
               ),

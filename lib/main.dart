@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 // screens
 import 'package:realworld/screens/home_screen.dart';
+// blocs
+import 'package:realworld/blocs/auth_bloc.dart';
 
 void main() => runApp(Conduit());
 
@@ -10,26 +12,25 @@ class Conduit extends StatefulWidget {
 }
 
 class _ConduitState extends State<Conduit> {
-
   @override
   void initState() {
+    authBloc.initState();
     super.initState();
   }
 
   @override
-  void setState(fn) {
-    super.setState(fn);
+  void dispose() {
+    authBloc.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Conduit',
-      theme: ThemeData(
-        primarySwatch: Colors.green
-      ),
+      theme: ThemeData(primarySwatch: Colors.green),
       routes: <String, WidgetBuilder>{
-        '/': (context) => HomeScreen()
+        '/': (context) => HomeScreen(),
       },
     );
   }
