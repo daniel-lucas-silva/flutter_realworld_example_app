@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:realworld/components/home_drawer.dart';
+import 'package:realworld/components.dart';
 import 'package:realworld/screens/home_tabs/global_feed_tab.dart';
 import 'package:realworld/screens/home_tabs/profile_tab.dart';
 import 'package:realworld/screens/home_tabs/your_feed_tab.dart';
@@ -31,14 +32,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Conduite",
-          style:
-              TextStyle(fontFamily: "Titillium", fontWeight: FontWeight.w700),
-        ),
-        centerTitle: true,
-      ),
+      appBar: RwAppBar(),
       drawer: HomeDrawer(),
       body: DefaultTabController(
         length: 3,

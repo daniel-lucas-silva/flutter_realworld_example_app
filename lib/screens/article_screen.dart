@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/components/cards.dart';
+import 'package:realworld/components.dart';
 
 class ArticleScreen extends StatefulWidget {
   @override
@@ -121,7 +121,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                   (BuildContext context, int index) {
                     return Padding(
                       padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Cards.comment(),
+                      child: RwCards.comment(),
                     );
                   },
                   childCount: 3,

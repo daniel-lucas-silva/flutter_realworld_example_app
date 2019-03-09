@@ -28,6 +28,7 @@ class RwInput extends StatelessWidget {
       decoration: InputDecoration(
         isDense: true,
         filled: true,
+        fillColor: Colors.blueGrey[50],
         hintText: hint,
         labelText: label,
       ),

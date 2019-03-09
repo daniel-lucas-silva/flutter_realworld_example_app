@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:realworld/components.dart';
 
-class Cards {
-  static Card article() {
+class RwCards {
+  static Card article({onOpenProfile}) {
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -9,14 +10,20 @@ class Cards {
           Container(
             padding: EdgeInsets.all(10.0),
             decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-              color: Colors.black12,
-            ))),
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.black12,
+                ),
+              ),
+            ),
             child: Row(
               children: <Widget>[
-                CircleAvatar(
-                  radius: 24.0,
+                GestureDetector(
+                  onTapUp: onOpenProfile,
+                  child: CircleAvatar(
+                    radius: 24.0,
+                    backgroundImage: AssetImage('images/smiley-cyrus.jpg'),
+                  ),
                 ),
                 Expanded(
                   child: Padding(
@@ -28,17 +35,16 @@ class Cards {
                         Text(
                           "ha 1 dia",
                           style:
-                              TextStyle(fontSize: 12.0, color: Colors.black54),
+                          TextStyle(fontSize: 12.0, color: Colors.black54),
                         ),
                       ],
                     ),
                   ),
                 ),
-                OutlineButton.icon(
+                RwButton.favorite(
+                  count: 1,
                   onPressed: () {},
-                  icon: Icon(Icons.favorite_border),
-                  label: Text("0"),
-                  padding: EdgeInsets.all(0.0),
+                  loading: false,
                 ),
               ],
             ),

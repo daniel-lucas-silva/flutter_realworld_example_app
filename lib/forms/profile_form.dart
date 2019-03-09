@@ -98,7 +98,7 @@ class _ProfileFormState extends State<ProfileForm> {
       hint: 'Short bio about you',
       label: 'Bio',
       keyboardType: TextInputType.multiline,
-      maxLines: 7,
+      maxLines: 6,
       focusNode: _bioFocus,
       onSaved: (val) => _modelView.bio = val,
     );

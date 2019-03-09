@@ -11,7 +11,16 @@ class ProfileTab extends StatelessWidget {
         right: 10.0,
         bottom: MediaQuery.of(context).viewInsets.bottom == 0 ? 60.0 : 10.0,
       ),
-      child: ProfileForm(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(bottom: 8.0, left: 20.0),
+            child: Text("Profile", style: TextStyle(fontSize: 20.0)),
+          ),
+          ProfileForm()
+        ],
+      ),
     );
   }
 }

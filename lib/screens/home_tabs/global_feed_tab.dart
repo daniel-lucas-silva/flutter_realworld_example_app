@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/components/cards.dart';
+import 'package:realworld/components.dart';
 import 'package:realworld/screens/article_screen.dart';
 import 'package:realworld/screens/profile_screen.dart';
 
@@ -31,7 +31,7 @@ class GlobalFeedTab extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Cards.article(
+                    child: RwCards.article(
                       onOpenProfile: (_) {
                         Navigator.push(
                           context,

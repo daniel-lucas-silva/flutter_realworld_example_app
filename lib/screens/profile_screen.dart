@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:realworld/components.dart';
+import 'package:realworld/screens/article_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -11,89 +13,135 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: DefaultTabController(
         length: _tabs.length,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              SliverOverlapAbsorber(
-                handle:
-                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                child: SliverAppBar(
-                  pinned: true,
-                  actions: <Widget>[
-                    FlatButton.icon(
-                      onPressed: () {},
-                      label: Text("Follow"),
-                      icon: Icon(Icons.add),
-                    )
-                  ],
-                  flexibleSpace: FlexibleSpaceBar(
-                    title: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Container(
-                          width: 20.0,
-                          height: 20.0,
-                          color: Colors.black,
-                        ),
-                        VerticalDivider(),
-                        Text('Username'),
-                      ],
-                    ),
-                    titlePadding: EdgeInsets.only(bottom: 65.0, left: 70.0),
-                  ),
-                  expandedHeight: 150.0,
-                  forceElevated: innerBoxIsScrolled,
-                  bottom: TabBar(
-                    tabs: _tabs
-                        .map(
-                          (String name) => Tab(text: name),
-                        )
-                        .toList(),
-                  ),
-                ),
-              ),
+              _buildAppBar(context, innerBoxIsScrolled),
             ];
           },
-          body: TabBarView(
-            children: _tabs.map((String name) {
-              return SafeArea(
-                top: false,
-                bottom: false,
-                child: Builder(
-                  builder: (BuildContext context) {
-                    return CustomScrollView(
-                      key: PageStorageKey<String>(name),
-                      slivers: <Widget>[
-                        SliverOverlapInjector(
-                          handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                  context),
-                        ),
-                        SliverPadding(
-                          padding: const EdgeInsets.all(8.0),
-                          sliver: SliverFixedExtentList(
-                            itemExtent: 48.0,
-                            delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
-                                return ListTile(
-                                  title: Text('Item $index'),
-                                );
-                              },
-                              childCount: 30,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              );
-            }).toList(),
+          body: _buildTabView(context),
+        ),
+      ),
+    );
+  }
+
+  _buildAppBar(context, forceElevated) {
+    return Theme(
+      data: RwTheme.light(context),
+      child: SliverOverlapAbsorber(
+        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+        child: SliverAppBar(
+          pinned: true,
+          title: Text(
+            "Conduite",
+            style:
+                TextStyle(fontFamily: "Titillium", fontWeight: FontWeight.w700),
+          ),
+          flexibleSpace: FlexibleSpaceBar(
+            collapseMode: CollapseMode.parallax,
+            background: SafeArea(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 30.0,
+                  ),
+                  RwDivider(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text("Username"),
+                      Text("since 1992")
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+          expandedHeight: 190.0,
+          actions: <Widget>[
+            FlatButton.icon(
+              onPressed: () {},
+              label: Text("Follow"),
+              icon: Icon(Icons.add),
+            )
+          ],
+          forceElevated: true,
+          elevation: forceElevated ? 2.5 : 0.5,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(56.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[50],
+                border: Border(
+                  top: BorderSide(color: Colors.grey[200])
+                )
+              ),
+              child: TabBar(
+                tabs: _tabs.map((String name) => Tab(text: name)).toList(),
+              ),
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  _buildTabView(context) {
+    return TabBarView(
+      children: _tabs.map((String name) {
+        return SafeArea(
+          top: false,
+          bottom: false,
+          child: Builder(
+            builder: (BuildContext context) {
+              return CustomScrollView(
+                key: PageStorageKey<String>(name),
+                slivers: <Widget>[
+                  SliverOverlapInjector(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                        context),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.all(8.0),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTapUp: (_) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ArticleScreen(),
+                                ),
+                              );
+                            },
+                            child: RwCards.article(
+                              onOpenProfile: (_) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProfileScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      }).toList(),
     );
   }
 }
