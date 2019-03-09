@@ -1,29 +1,36 @@
 import 'package:realworld/utils.dart';
 
 class ArticlesService {
-  Request all(int page, {int lim: 10}) => request.get('/articles?${_limit(lim, page)}');
+  all({int page, int lim: 10}) async =>
+      await request.get('/articles?${_limit(lim, page)}');
 
-  Request byAuthor(String author, int page) => request.get('/articles?author=$author&${_limit(5, page)}');
+  byAuthor(String author, {int page}) async =>
+      await request.get('/articles?author=$author&${_limit(5, page)}');
 
-  Request byTag(String tag, int page, { int lim: 10}) => request.get('/articles?tag=$tag&${_limit(lim, page)}');
+  byTag(String tag, {int page, int lim: 10}) async =>
+      await request.get('/articles?tag=$tag&${_limit(lim, page)}');
 
-  Request del(String slug) => request.delete('/articles/$slug');
+  del(String slug) async => await request.delete('/articles/$slug');
 
-  Request favorite(String slug) => request.post('/articles/$slug/favorite');
+  favorite(String slug) async => await request.post('/articles/$slug/favorite');
 
-  Request favoritedBy(String author, int page) => request.get('/articles?favorited=$author&${_limit(5, page)}');
+  favoritedBy(String author, {int page}) async =>
+      await request.get('/articles?favorited=$author&${_limit(5, page)}');
 
-  Request feed() => request.get('/articles/feed?limit=10&offset=0');
+  feed() async => await request.get('/articles/feed?limit=10&offset=0');
 
-  Request get(slug) => request.get('/articles/$slug');
+  get(slug) async => await request.get('/articles/$slug');
 
-  Request unfavorite(String slug) => request.delete('/articles/$slug/favorite');
+  unfavorite(String slug) async =>
+      await request.delete('/articles/$slug/favorite');
 
-  Request update(String slug, Map<String, dynamic> data) => request.put('/articles/$slug', data: data);
+  update(String slug, Map<String, dynamic> data) async =>
+      await request.put('/articles/$slug', data: data);
 
-  Request create(Map<String, dynamic> data) => request.post('/articles', data: data);
+  create(Map<String, dynamic> data) async =>
+      await request.post('/articles', data: data);
 
-  String _limit(count, p) => 'limit=$count&offset=${p ? p * count : 0}';
+  String _limit(count, p) => 'limit=$count&offset=${p != null ? p * count : 0}';
 }
 
 final ArticlesService articlesService = ArticlesService();
