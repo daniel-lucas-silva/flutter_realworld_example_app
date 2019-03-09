@@ -1,11 +1,14 @@
 import 'package:realworld/utils.dart';
 
 class CommentsService {
-  Request create(String slug, Map<String, dynamic> comment) => request.post('/articles/$slug/comments', data: comment);
+  create(String slug, Map<String, dynamic> comment) async =>
+      await request.post('/articles/$slug/comments', data: comment);
 
-  Request delete(String slug, commentId) => request.delete('/articles/$slug/comments/$commentId');
+  delete(String slug, commentId) async =>
+      await request.delete('/articles/$slug/comments/$commentId');
 
-  Request forArticle(String slug) => request.get('/articles/$slug/comments');
+  forArticle(String slug) async =>
+      await request.get('/articles/$slug/comments');
 }
 
 final CommentsService commentsService = CommentsService();

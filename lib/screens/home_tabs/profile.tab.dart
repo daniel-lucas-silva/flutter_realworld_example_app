@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/forms/profile_form.dart';
+import 'package:realworld/forms.dart';
 
 class ProfileTab extends StatelessWidget {
   @override

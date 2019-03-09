@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/blocs/auth_bloc.dart';
+import 'package:realworld/blocs/auth.bloc.dart';
 import 'package:realworld/components.dart';
 import 'package:realworld/utils.dart';
 

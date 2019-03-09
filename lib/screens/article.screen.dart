@@ -18,7 +18,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
             slivers: <Widget>[
               Theme(
                 data: theme.copyWith(
-                  primaryColor: Colors.black87,
+                  primaryColor: Colors.grey[900],
                   brightness: Brightness.dark,
                   textTheme: TextTheme(
                     title: TextStyle(color: Colors.white),
@@ -43,7 +43,10 @@ class _ArticleScreenState extends State<ArticleScreen> {
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              CircleAvatar(),
+                              CircleAvatar(
+                                radius: 24.0,
+                                backgroundImage: AssetImage('images/smiley-cyrus.jpg'),
+                              ),
                               VerticalDivider(),
                               Expanded(
                                 child: Column(
@@ -92,12 +95,15 @@ class _ArticleScreenState extends State<ArticleScreen> {
               ),
               SliverToBoxAdapter(
                 child: Container(
-                  color: Colors.grey[200],
+                  color: Colors.blueGrey[50],
                   padding: EdgeInsets.all(10.0),
                   margin: EdgeInsets.symmetric(vertical: 12.0),
                   child: Row(
                     children: <Widget>[
-                      CircleAvatar(),
+                      CircleAvatar(
+                        radius: 24.0,
+                        backgroundImage: AssetImage('images/smiley-cyrus.jpg'),
+                      ),
                       VerticalDivider(),
                       Expanded(
                         child: TextField(

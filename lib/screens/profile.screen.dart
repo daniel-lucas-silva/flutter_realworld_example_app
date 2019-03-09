@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/components.dart';
-import 'package:realworld/screens/article_screen.dart';
+import 'package:realworld/screens.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -54,10 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text("Username"),
-                      Text("since 1992")
-                    ],
+                    children: <Widget>[Text("Username"), Text("since 1992")],
                   )
                 ],
               ),
@@ -77,11 +74,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             preferredSize: Size.fromHeight(56.0),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[50],
-                border: Border(
-                  top: BorderSide(color: Colors.grey[200])
-                )
-              ),
+                  color: Colors.grey[50],
+                  border: Border(top: BorderSide(color: Colors.grey[200]))),
               child: TabBar(
                 tabs: _tabs.map((String name) => Tab(text: name)).toList(),
               ),
@@ -111,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     padding: const EdgeInsets.all(8.0),
                     sliver: SliverList(
                       delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
+                        (BuildContext context, int index) {
                           return GestureDetector(
                             onTapUp: (_) {
                               Navigator.push(

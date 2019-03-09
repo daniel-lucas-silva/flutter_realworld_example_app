@@ -2,27 +2,27 @@ import 'package:realworld/constants.dart';
 import 'package:dio/dio.dart';
 
 class Request {
-  final Dio _dio = Dio();
+  final Dio dio = Dio();
 
   get(String url) async {
     try {
-      return await _dio.get("$APIURL/$url");
+      return await dio.get("$APIURL/$url");
     } catch (e) {
       throw (e);
     }
   }
 
-  post(String url, { data }) async {
+  post(String url, {data}) async {
     try {
-      return await _dio.post("$APIURL/$url", data: data);
+      return await dio.post("$APIURL/$url", data: data);
     } catch (e) {
       throw (e);
     }
   }
 
-  put(String url, { data }) async {
+  put(String url, {data}) async {
     try {
-      return await _dio.put("$APIURL/$url", data: data);
+      return await dio.put("$APIURL/$url", data: data);
     } catch (e) {
       throw (e);
     }
@@ -30,7 +30,7 @@ class Request {
 
   delete(String url) async {
     try {
-      return await _dio.delete("$APIURL/$url");
+      return await dio.delete("$APIURL/$url");
     } catch (e) {
       throw (e);
     }

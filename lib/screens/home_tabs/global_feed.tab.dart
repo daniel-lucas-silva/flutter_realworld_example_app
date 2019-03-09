@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/components.dart';
-import 'package:realworld/screens/article_screen.dart';
-import 'package:realworld/screens/profile_screen.dart';
+import 'package:realworld/screens.dart';
 
 class GlobalFeedTab extends StatelessWidget {
   @override

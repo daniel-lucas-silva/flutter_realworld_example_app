@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 // screens
-import 'package:realworld/screens/home_screen.dart';
+import 'package:realworld/screens.dart';
 // blocs
-import 'package:realworld/blocs/auth_bloc.dart';
+import 'package:realworld/blocs/auth.bloc.dart';
 
 void main() => runApp(Conduit());
 

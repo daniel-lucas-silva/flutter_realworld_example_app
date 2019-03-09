@@ -21,7 +21,7 @@ class RwCards {
                 GestureDetector(
                   onTapUp: onOpenProfile,
                   child: CircleAvatar(
-                    radius: 24.0,
+                    radius: 20.0,
                     backgroundImage: AssetImage('images/smiley-cyrus.jpg'),
                   ),
                 ),
@@ -77,7 +77,10 @@ class RwCards {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: CircleAvatar(),
+            child: CircleAvatar(
+              radius: 20.0,
+              backgroundImage: AssetImage('images/smiley-cyrus.jpg'),
+            ),
           ),
           Expanded(
             child: Column(

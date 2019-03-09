@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:realworld/components/home_drawer.dart';
 import 'package:realworld/components.dart';
-import 'package:realworld/screens/home_tabs/global_feed_tab.dart';
-import 'package:realworld/screens/home_tabs/profile_tab.dart';
-import 'package:realworld/screens/home_tabs/your_feed_tab.dart';
+import 'package:realworld/screens/home_tabs/home_tabs.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -33,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: RwAppBar(),
-      drawer: HomeDrawer(),
+      drawer: RwDrawer(),
       body: DefaultTabController(
         length: 3,
         child: Stack(
