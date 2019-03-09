@@ -1,8 +1,7 @@
 import 'package:realworld/utils.dart';
 
 class AuthService {
-  Request login(email, password) {
-
+  login(email, password) async {
     final Map<String, dynamic> data = {
       "user": {
         "email": email,
@@ -10,11 +9,10 @@ class AuthService {
       }
     };
 
-    return request.post('/users/login', data: data);
+    return await request.post('/users/login', data: data);
   }
 
-  Request register(username, email, password) {
-
+  register(username, email, password) async {
     final Map<String, dynamic> data = {
       "user": {
         "username": username,
@@ -23,12 +21,12 @@ class AuthService {
       }
     };
 
-    return request.post('/users', data: data);
+    return await request.post('/users', data: data);
   }
 
-  Request update(data) => request.put('/users', data: data);
+  update(data) async => await request.put('/users', data: data);
 
-  Request current() => request.get('/users');
+  current() async => await request.get('/user');
 }
 
 final AuthService authService = AuthService();

@@ -6,7 +6,7 @@ void main() {
   // test('feed', () async {
   //   Response response;
   //   response = await articlesService.feed();
-  //   expect(response.data["errCode"], 0);
+  //   expect(response.statusCode, 200);
   //   expect(response.headers != null, true);
   // });
 
@@ -14,7 +14,7 @@ void main() {
     Response response;
     response = await articlesService.all();
     // print(response);
-    expect(response.data["errCode"], 0);
+    expect(response.statusCode, 200);
     expect(response.headers != null, true);
   });
 
@@ -22,7 +22,7 @@ void main() {
     Response response;
     response = await articlesService.byAuthor('dannlks');
     // print(response);
-    expect(response.data["errCode"], 0);
+    expect(response.statusCode, 200);
     expect(response.headers != null, true);
   });
 
@@ -30,7 +30,7 @@ void main() {
     Response response;
     response = await articlesService.byTag('test');
     // print(response);
-    expect(response.data["errCode"], 0);
+    expect(response.statusCode, 200);
     expect(response.headers != null, true);
   });
 }
