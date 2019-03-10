@@ -31,6 +31,8 @@ class _ConduitState extends State<Conduit> {
       theme: ThemeData(primarySwatch: Colors.green),
       routes: <String, WidgetBuilder>{
         '/': (context) => HomeScreen(),
+        'login': (context) => AuthLoginScreen(),
+        'register': (context) => AuthRegisterScreen(),
       },
     );
   }
