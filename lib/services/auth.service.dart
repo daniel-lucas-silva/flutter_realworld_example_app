@@ -28,5 +28,3 @@ class AuthService {
 
   current() async => await request.get('/user');
 }
-
-final AuthService authService = AuthService();

@@ -9,5 +9,3 @@ class ProfileService {
 
   get(String username) async => await request.get('/profiles/$username');
 }
-
-final ProfileService profileService = ProfileService();

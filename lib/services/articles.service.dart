@@ -32,5 +32,3 @@ class ArticlesService {
 
   String _limit(count, p) => 'limit=$count&offset=${p != null ? p * count : 0}';
 }
-
-final ArticlesService articlesService = ArticlesService();

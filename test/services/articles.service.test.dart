@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:realworld/services.dart';
 
 void main() {
+  final ArticlesService articlesService = ArticlesService();
   // test('feed', () async {
   //   Response response;
   //   response = await articlesService.feed();

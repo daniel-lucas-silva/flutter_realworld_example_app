@@ -10,5 +10,3 @@ class CommentsService {
   forArticle(String slug) async =>
       await request.get('/articles/$slug/comments');
 }
-
-final CommentsService commentsService = CommentsService();

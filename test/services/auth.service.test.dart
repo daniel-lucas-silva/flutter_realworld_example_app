@@ -4,6 +4,8 @@ import 'package:realworld/utils.dart';
 import 'package:realworld/services.dart';
 
 void main() {
+  final AuthService authService = AuthService();
+
   test('login and current', () async {
     Response response;
     response = await authService.login("jake@jake.jake", "jakejake");
