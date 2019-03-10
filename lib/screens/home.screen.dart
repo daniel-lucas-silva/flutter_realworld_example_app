@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:realworld/components.dart';
+import 'package:realworld/blocs/auth.bloc.dart';
 import 'package:realworld/screens/home_tabs/home_tabs.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    _pageController = PageController(keepPage: true);
     _index = 0;
   }
 
@@ -31,28 +32,54 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       appBar: RwAppBar(),
       drawer: RwDrawer(),
-      body: DefaultTabController(
-        length: 3,
-        child: Stack(
-          children: <Widget>[
-            PageView(
-              controller: _pageController,
-              pageSnapping: true,
-              onPageChanged: _onPageChanged,
+      body: StreamBuilder(
+        stream: authBloc.loggedIn,
+        initialData: false,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          return DefaultTabController(
+            length: snapshot.data ? 3 : 2,
+            child: Stack(
               children: <Widget>[
-                GlobalFeedTab(),
-                YourFeedTab(),
-                ProfileTab(),
+                PageView(
+                  controller: _pageController,
+                  pageSnapping: true,
+                  onPageChanged: _onPageChanged,
+                  children: snapshot.data
+                      ? [
+                          GlobalFeedTab(),
+                          YourFeedTab(),
+                          ProfileTab(),
+                        ]
+                      : [
+                          GlobalFeedTab(),
+                          ProfileTab(),
+                        ],
+                ),
+                _tabBar(snapshot.data)
               ],
             ),
-            _tabBar()
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
-  Align _tabBar() {
+  Align _tabBar(loggedIn) {
+    BottomNavigationBarItem global = BottomNavigationBarItem(
+      icon: Icon(Icons.public),
+      title: Text('Global Feed'),
+    );
+
+    BottomNavigationBarItem my = BottomNavigationBarItem(
+      icon: Icon(Icons.person_add),
+      title: Text('Your Feed'),
+    );
+
+    BottomNavigationBarItem profile = BottomNavigationBarItem(
+      icon: Icon(Icons.account_circle),
+      title: Text('Profile'),
+    );
+
     return MediaQuery.of(context).viewInsets.bottom == 0
         ? Align(
             alignment: Alignment.bottomCenter,
@@ -63,20 +90,7 @@ class _HomeScreenState extends State<HomeScreen>
               inactiveColor: Colors.black54,
               activeColor: Colors.lightGreen[700],
               iconSize: 24.0,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.public),
-                  title: Text('Global Feed'),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person_add),
-                  title: Text('Your Feed'),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.account_circle),
-                  title: Text('Profile'),
-                ),
-              ],
+              items: loggedIn ? [global, my, profile] : [global, profile],
             ),
           )
         : Align();

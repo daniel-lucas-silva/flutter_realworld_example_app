@@ -8,7 +8,13 @@ void main() {
 
   test('login and current', () async {
     Response response;
-    response = await authService.login("jake@jake.jake", "jakejake");
+
+    var credentials = {
+      "email": "jake@jake.jake",
+      "password": "jakejake",
+    };
+
+    response = await authService.login(credentials);
     // print(response.data);
     expect(response.statusCode, 200);
     expect(response.headers != null, true);

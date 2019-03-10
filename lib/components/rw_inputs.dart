@@ -6,19 +6,29 @@ class RwInput extends StatelessWidget {
   final Function onEditingComplete;
   final String label;
   final String hint;
+  final String prefixText;
   final FocusNode focusNode;
   final TextInputType keyboardType;
+  final TextEditingController controller;
   final int maxLines;
+  final Widget prefixIcon;
+  final bool obscureText;
+  final TextCapitalization textCapitalization;
 
   RwInput({
     @required this.onSaved,
     this.validator,
     this.onEditingComplete,
     this.label,
+    this.controller,
     this.hint,
+    this.prefixText,
     this.focusNode,
-    this.keyboardType,
+    this.keyboardType: TextInputType.text,
     this.maxLines,
+    this.prefixIcon,
+    this.textCapitalization: TextCapitalization.none,
+    this.obscureText: false,
   });
 
   @override
@@ -31,13 +41,18 @@ class RwInput extends StatelessWidget {
         fillColor: Colors.blueGrey[50],
         hintText: hint,
         labelText: label,
+        prefixText: prefixText,
+        prefixIcon: prefixIcon,
       ),
       onEditingComplete: onEditingComplete,
       focusNode: focusNode,
+      controller: controller,
       validator: validator,
       onSaved: onSaved,
-      keyboardType: keyboardType ?? TextInputType.text,
+      keyboardType: keyboardType,
       maxLines: maxLines,
+      obscureText: obscureText,
+      textCapitalization: textCapitalization,
     );
   }
 

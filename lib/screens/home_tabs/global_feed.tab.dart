@@ -9,7 +9,8 @@ class GlobalFeedTab extends StatefulWidget {
   _GlobalFeedTabState createState() => _GlobalFeedTabState();
 }
 
-class _GlobalFeedTabState extends State<GlobalFeedTab> {
+class _GlobalFeedTabState extends State<GlobalFeedTab>
+    with AutomaticKeepAliveClientMixin<GlobalFeedTab> {
   final ArticlesBloc _bloc = ArticlesBloc("table");
 
   @override
@@ -25,6 +26,9 @@ class _GlobalFeedTabState extends State<GlobalFeedTab> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (scrollInfo) {
@@ -37,8 +41,9 @@ class _GlobalFeedTabState extends State<GlobalFeedTab> {
         onRefresh: _bloc.load,
         child: StreamBuilder(
           stream: _bloc.items,
-          initialData: [],
-          builder: (context, snapshot) {
+          initialData: <Article>[],
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Article>> snapshot) {
             if (snapshot.hasError) return _empty();
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -61,12 +66,13 @@ class _GlobalFeedTabState extends State<GlobalFeedTab> {
       key: PageStorageKey<String>("global_feed"),
       slivers: <Widget>[
         SliverPadding(
-          padding: EdgeInsets.all(5.0),
+          padding:
+              EdgeInsets.only(top: 5.0, left: 5.0, right: 5.0, bottom: 50.0),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 Article article = data[index];
-                print(article.toJson());
+
                 return GestureDetector(
                   onTapUp: (_) {
                     Navigator.push(
