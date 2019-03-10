@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realworld/blocs/app.bloc.dart';
 // screens
 import 'package:realworld/screens.dart';
 // blocs
@@ -14,12 +15,14 @@ class Conduit extends StatefulWidget {
 class _ConduitState extends State<Conduit> {
   @override
   void initState() {
+    appBloc.initState();
     authBloc.initState();
     super.initState();
   }
 
   @override
   void dispose() {
+    appBloc.dispose();
     authBloc.dispose();
     super.dispose();
   }

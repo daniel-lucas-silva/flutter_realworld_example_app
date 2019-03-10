@@ -30,7 +30,9 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: RwAppBar(),
+      appBar: RwAppBar(
+        actions: <Widget>[RwLoading()],
+      ),
       drawer: RwDrawer(),
       body: StreamBuilder(
         stream: authBloc.loggedIn,

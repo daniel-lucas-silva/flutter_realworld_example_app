@@ -3,6 +3,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:realworld/models.dart';
 import 'package:realworld/utils.dart';
 import 'package:realworld/services.dart';
+import 'app.bloc.dart';
 
 class AuthBloc {
   // controllers
@@ -30,7 +31,7 @@ class AuthBloc {
   }
 
   Future<bool> authenticate() async {
-    _loading.sink.add(true);
+    appBloc.setLoading(true);
     final String token = await storage.read(key: "token");
 
     if (token != null) {
@@ -42,14 +43,14 @@ class AuthBloc {
         _user.sink.add(User.fromJson(response.data['user']));
         print(response);
         _loggedIn.sink.add(true);
+        appBloc.setLoading(false);
         return true;
       } catch (e) {
+        appBloc.setLoading(false);
         _user.sink.addError("Some Error");
         throw (e);
       }
     }
-
-    _loading.sink.add(false);
     return false;
   }
 

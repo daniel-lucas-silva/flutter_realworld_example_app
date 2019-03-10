@@ -16,7 +16,7 @@ class ProfileTab extends StatelessWidget {
   }
 
   _form(context) {
-    SingleChildScrollView(
+    return SingleChildScrollView(
       padding: EdgeInsets.only(
         top: 10.0,
         left: 10.0,
