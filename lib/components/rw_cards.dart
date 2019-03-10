@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/components.dart';
+import 'package:realworld/models.dart';
 
 class RwCards {
-  static Card article({onOpenProfile}) {
+  static Card article(
+      {onOpenProfile,
+      String title,
+      String description,
+      Author author,
+      bool favorited,
+      int favoritesCount}) {
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +29,7 @@ class RwCards {
                   onTapUp: onOpenProfile,
                   child: CircleAvatar(
                     radius: 20.0,
-                    backgroundImage: AssetImage('images/smiley-cyrus.jpg'),
+                    backgroundImage: NetworkImage("${author.image}"),
                   ),
                 ),
                 Expanded(
@@ -31,18 +38,19 @@ class RwCards {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text("Fulano de tal"),
+                        Text(author.username),
                         Text(
                           "ha 1 dia",
                           style:
-                          TextStyle(fontSize: 12.0, color: Colors.black54),
+                              TextStyle(fontSize: 12.0, color: Colors.black54),
                         ),
                       ],
                     ),
                   ),
                 ),
                 RwButton.favorite(
-                  count: 1,
+                  count: favoritesCount,
+                  favorited: favorited,
                   onPressed: () {},
                   loading: false,
                 ),
@@ -55,11 +63,11 @@ class RwCards {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Title",
+                  title,
                   style: TextStyle(fontSize: 18.0),
                 ),
                 Text(
-                  "Subitle",
+                  description,
                   style: TextStyle(fontSize: 12.0, color: Colors.black54),
                 ),
               ],

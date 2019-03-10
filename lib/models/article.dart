@@ -8,7 +8,7 @@ class Article {
   final Author author;
   final bool favorited;
   final int favoritesCount;
-  final List<String> tags;
+  final List tags;
   final String createdAt;
   final String updatedAt;
 

@@ -67,7 +67,7 @@ class RwButton extends StatelessWidget {
     );
   }
 
-  static favorite({count, onPressed, loading}) {
+  static favorite({count, onPressed, loading, favorited}) {
     return Ink(
       decoration: BoxDecoration(
         color: Colors.white,

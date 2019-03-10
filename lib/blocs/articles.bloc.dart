@@ -21,15 +21,17 @@ class ArticlesBloc {
     _items = BehaviorSubject<List<Article>>(seedValue: []);
   }
 
-  load() async {
+  Future<Response> load() async {
     try {
       Response result = await _service.all();
 
-      List<Article> articles = result.data["articles"]
+      var articles = result.data["articles"]
           .map((article) => Article.fromJson(article))
           .toList();
 
-      _items.sink.add(articles);
+      _items.sink.add(List<Article>.from(articles));
+
+      return result;
     } catch (e) {
       if (e?.response?.statusCode == 404) _items.sink.addError("No records");
       throw (e);
