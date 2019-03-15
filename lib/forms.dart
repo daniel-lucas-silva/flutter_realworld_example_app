@@ -1,5 +1,5 @@
-export 'package:realworld/forms/article.form.dart';
-export 'package:realworld/forms/comment.form.dart';
-export 'package:realworld/forms/login.form.dart';
-export 'package:realworld/forms/profile.form.dart';
-export 'package:realworld/forms/register.form.dart';
+export './src/forms/article.form.dart';
+export './src/forms/comment.form.dart';
+export './src/forms/login.form.dart';
+export './src/forms/profile.form.dart';
+export './src/forms/register.form.dart';

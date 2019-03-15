@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/blocs/app.bloc.dart';
-// screens
-import 'package:realworld/screens.dart';
-// blocs
-import 'package:realworld/blocs/auth.bloc.dart';
+import 'package:realworld/blocs.dart' show appBloc, authBloc;
+import 'package:realworld/screens.dart' show HomeScreen;
+import 'package:realworld/utils.dart' show storage, request;
 
-void main() => runApp(Conduit());
+void main() async {
+  final String token = await storage.read(key: "token");
+  request.auth(token);
+  runApp(Conduit(token));
+}
 
 class Conduit extends StatefulWidget {
+  final String token;
+
+  Conduit(this.token);
+
   @override
   _ConduitState createState() => _ConduitState();
 }
@@ -17,6 +23,9 @@ class _ConduitState extends State<Conduit> {
   void initState() {
     appBloc.initState();
     authBloc.initState();
+
+    if (widget.token != null) authBloc.loadUser();
+
     super.initState();
   }
 
@@ -32,11 +41,7 @@ class _ConduitState extends State<Conduit> {
     return MaterialApp(
       title: 'Conduit',
       theme: ThemeData(primarySwatch: Colors.green),
-      routes: <String, WidgetBuilder>{
-        '/': (context) => HomeScreen(),
-        'login': (context) => AuthLoginScreen(),
-        'register': (context) => AuthRegisterScreen(),
-      },
+      home: HomeScreen(),
     );
   }
 }

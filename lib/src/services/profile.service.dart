@@ -1,4 +1,4 @@
-import 'package:realworld/utils.dart';
+import 'package:realworld/utils.dart' show request;
 
 class ProfileService {
   follow(String username) async =>

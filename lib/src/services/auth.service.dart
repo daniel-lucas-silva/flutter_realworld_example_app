@@ -1,4 +1,4 @@
-import 'package:realworld/utils.dart';
+import 'package:realworld/utils.dart' show request;
 
 class AuthService {
   login(data) async => await request.post('/users/login', data: data);

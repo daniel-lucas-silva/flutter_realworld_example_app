@@ -1,5 +1,5 @@
-export 'package:realworld/services/articles.service.dart';
-export 'package:realworld/services/auth.service.dart';
-export 'package:realworld/services/comments.service.dart';
-export 'package:realworld/services/profile.service.dart';
-export 'package:realworld/services/tags.service.dart';
+export './src/services/articles.service.dart';
+export './src/services/auth.service.dart';
+export './src/services/comments.service.dart';
+export './src/services/profile.service.dart';
+export './src/services/tags.service.dart';

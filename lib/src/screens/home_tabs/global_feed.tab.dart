@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realworld/components.dart';
 import 'package:realworld/models.dart';
 import 'package:realworld/screens.dart';
-import 'package:realworld/blocs/articles.bloc.dart';
+import 'package:realworld/blocs.dart' show ArticlesBloc;
 
 class GlobalFeedTab extends StatefulWidget {
   @override

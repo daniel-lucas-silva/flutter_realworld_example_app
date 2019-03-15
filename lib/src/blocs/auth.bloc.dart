@@ -21,7 +21,6 @@ class AuthBloc {
     _loggedIn = BehaviorSubject<bool>(seedValue: false);
     _loading = BehaviorSubject<bool>();
     _user = BehaviorSubject<User>(seedValue: User());
-    authenticate();
   }
 
   void dispose() {
@@ -30,28 +29,25 @@ class AuthBloc {
     _user.close();
   }
 
-  Future<bool> authenticate() async {
+  Future<bool> loadUser() async {
     appBloc.setLoading(true);
-    final String token = await storage.read(key: "token");
 
-    if (token != null) {
-      request.dio.options.headers = {'Authorization': 'Token $token'};
-
-      try {
+    try {
         Response response = await _service.current();
 
         _user.sink.add(User.fromJson(response.data['user']));
-        print(response);
         _loggedIn.sink.add(true);
+        
         appBloc.setLoading(false);
+        
         return true;
       } catch (e) {
         appBloc.setLoading(false);
+        
         _user.sink.addError("Some Error");
+        
         throw (e);
       }
-    }
-    return false;
   }
 
   Future<bool> login(credentials) async {

@@ -1,8 +1,12 @@
-import 'package:realworld/constants.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' show Dio;
+import 'package:realworld/constants.dart' show APIURL;
 
 class Request {
   final Dio dio = Dio();
+
+  auth(token) {
+    request.dio.options.headers = {'Authorization': 'Token $token'};
+  }
 
   get(String url) async {
     try {

@@ -1,4 +1,4 @@
-import 'package:realworld/utils.dart';
+import 'package:realworld/utils.dart' show request;
 
 class TagsService {
   getAll() async => await request.get('/tags');

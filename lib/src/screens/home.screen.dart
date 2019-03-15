@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:realworld/components.dart';
-import 'package:realworld/blocs/auth.bloc.dart';
-import 'package:realworld/screens/home_tabs/home_tabs.dart';
+import 'package:realworld/blocs.dart' show authBloc;
+import 'package:realworld/src/screens/home_tabs/home_tabs.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/blocs/auth.bloc.dart';
+import 'package:realworld/blocs.dart' show authBloc;
 import 'package:realworld/components.dart';
 import 'package:realworld/forms.dart';
 

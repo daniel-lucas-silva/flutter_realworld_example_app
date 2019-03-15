@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/blocs/app.bloc.dart';
+import 'package:realworld/blocs.dart' show appBloc;
 
 class RwLoading extends StatelessWidget {
   @override
@@ -16,12 +16,12 @@ class RwLoading extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(right: 10.0),
                     height: 20.0,
-                    width: 20.0,
+                    width: 20.0, 
                     child: CircularProgressIndicator(
                       strokeWidth: 2.0,
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
-                  )
+                  ),
                 ],
               )
             : Container();

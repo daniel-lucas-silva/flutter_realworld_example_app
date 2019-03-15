@@ -8,23 +8,10 @@ class RwDrawer extends StatefulWidget {
 }
 
 class _RwDrawerState extends State<RwDrawer> with TickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  static const List<String> _drawerContents = <String>[
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F'
-  ];
-
   static final Animatable<Offset> _drawerDetailsTween = Tween<Offset>(
     begin: const Offset(0.0, -1.0),
     end: Offset.zero,
-  ).chain(CurveTween(
-    curve: Curves.fastOutSlowIn,
-  ));
+  ).chain(CurveTween(curve: Curves.fastOutSlowIn));
 
   AnimationController _controller;
   Animation<double> _drawerContentsOpacity;
@@ -49,12 +36,6 @@ class _RwDrawerState extends State<RwDrawer> with TickerProviderStateMixin {
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  void _showNotImplementedMessage() {
-    Navigator.pop(context); // Dismiss the drawer.
-    _scaffoldKey.currentState.showSnackBar(
-        const SnackBar(content: Text("The drawer's items don't do anything")));
   }
 
   @override
@@ -120,17 +101,17 @@ class _RwDrawerState extends State<RwDrawer> with TickerProviderStateMixin {
         ListTile(
           leading: Icon(Icons.local_offer),
           title: Text('Tags'),
-          onTap: _showNotImplementedMessage,
+          onTap: () {},
         ),
         ListTile(
           leading: Icon(Icons.info_outline),
           title: Text('About'),
-          onTap: _showNotImplementedMessage,
+          onTap: () {},
         ),
         ListTile(
           leading: Icon(Icons.code),
           title: Text('Github'),
-          onTap: _showNotImplementedMessage,
+          onTap: () {},
         )
       ],
     );
@@ -144,12 +125,12 @@ class _RwDrawerState extends State<RwDrawer> with TickerProviderStateMixin {
         ListTile(
           leading: const Icon(Icons.person_outline),
           title: const Text('Profile'),
-          onTap: _showNotImplementedMessage,
+          onTap: () {},
         ),
         ListTile(
           leading: const Icon(Icons.power_settings_new),
           title: const Text('Logout'),
-          onTap: _showNotImplementedMessage,
+          onTap: () {},
         ),
       ],
     );
