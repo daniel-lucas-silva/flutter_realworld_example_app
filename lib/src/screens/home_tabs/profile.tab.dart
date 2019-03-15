@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:realworld/blocs.dart' show authBloc;
 import 'package:realworld/components.dart';
 import 'package:realworld/forms.dart';
+import 'package:realworld/utils.dart';
+import 'package:realworld/screens.dart' show AuthLoginScreen, AuthRegisterScreen;
 
 class ProfileTab extends StatelessWidget {
   @override
@@ -45,14 +47,14 @@ class ProfileTab extends StatelessWidget {
           _logo(),
           RwButton(
             onPressed: () {
-              Navigator.of(context).pushNamed("login");
+              navigate(context, AuthLoginScreen());
             },
             title: "Sign In",
           ),
           RwDivider(),
           RwButton(
             onPressed: () {
-              Navigator.of(context).pushNamed("register");
+              navigate(context, AuthRegisterScreen());
             },
             title: "Sign Up",
             background: Colors.white,

@@ -1,17 +1,26 @@
-import 'package:dio/dio.dart' show Dio;
+import 'package:dio/dio.dart' show Dio, DioError;
 import 'package:realworld/constants.dart' show APIURL;
 
 class Request {
   final Dio dio = Dio();
 
   auth(token) {
+    if (token != null)
     request.dio.options.headers = {'Authorization': 'Token $token'};
   }
 
   get(String url) async {
     try {
       return await dio.get("$APIURL/$url");
-    } catch (e) {
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print(e.response.data);
+        print(e.response.headers);
+        print(e.response.request);
+      } else {
+        print(e.request);
+        print(e.message);
+      }
       throw (e);
     }
   }
@@ -20,6 +29,14 @@ class Request {
     try {
       return await dio.post("$APIURL/$url", data: data);
     } catch (e) {
+      if (e.response != null) {
+        print(e.response.data);
+        print(e.response.headers);
+        print(e.response.request);
+      } else {
+        print(e.request);
+        print(e.message);
+      }
       throw (e);
     }
   }
@@ -28,6 +45,14 @@ class Request {
     try {
       return await dio.put("$APIURL/$url", data: data);
     } catch (e) {
+      if (e.response != null) {
+        print(e.response.data);
+        print(e.response.headers);
+        print(e.response.request);
+      } else {
+        print(e.request);
+        print(e.message);
+      }
       throw (e);
     }
   }
@@ -36,6 +61,14 @@ class Request {
     try {
       return await dio.delete("$APIURL/$url");
     } catch (e) {
+      if (e.response != null) {
+        print(e.response.data);
+        print(e.response.headers);
+        print(e.response.request);
+      } else {
+        print(e.request);
+        print(e.message);
+      }
       throw (e);
     }
   }

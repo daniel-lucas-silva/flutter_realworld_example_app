@@ -103,7 +103,7 @@ class AuthBloc {
   }
 
   Future<bool> logout() async {
-    _user.sink.add(User());
+    _user.sink.add(null);
     await storage.delete(key: "token");
     _loggedIn.sink.add(false);
     return true;

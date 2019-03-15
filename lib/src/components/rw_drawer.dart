@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/blocs.dart' show authBloc;
-import 'package:realworld/models.dart';
+import 'package:realworld/models.dart' show User;
 
 class RwDrawer extends StatefulWidget {
   @override
@@ -8,28 +8,28 @@ class RwDrawer extends StatefulWidget {
 }
 
 class _RwDrawerState extends State<RwDrawer> with TickerProviderStateMixin {
-  static final Animatable<Offset> _drawerDetailsTween = Tween<Offset>(
-    begin: const Offset(0.0, -1.0),
+  static final Animatable<Offset> _drawerTween = Tween<Offset>(
+    begin: Offset(0.0, -1.0),
     end: Offset.zero,
   ).chain(CurveTween(curve: Curves.fastOutSlowIn));
 
   AnimationController _controller;
-  Animation<double> _drawerContentsOpacity;
-  Animation<Offset> _drawerDetailsPosition;
-  bool _showDrawerContents = true;
+  Animation<double> _drawerOpacity;
+  Animation<Offset> _drawerPosition;
+  bool _showDrawer = true;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 200),
     );
-    _drawerContentsOpacity = CurvedAnimation(
+    _drawerOpacity = CurvedAnimation(
       parent: ReverseAnimation(_controller),
       curve: Curves.fastOutSlowIn,
     );
-    _drawerDetailsPosition = _controller.drive(_drawerDetailsTween);
+    _drawerPosition = _controller.drive(_drawerTween);
   }
 
   @override
@@ -46,49 +46,58 @@ class _RwDrawerState extends State<RwDrawer> with TickerProviderStateMixin {
         children: <Widget>[
           StreamBuilder(
             stream: authBloc.user,
-            // initialData: User(),
             builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-              if (snapshot.hasData)
-                return UserAccountsDrawerHeader(
-                  accountName: Text("${snapshot.data.username}"),
-                  accountEmail: Text("${snapshot.data.email}"),
-                  onDetailsPressed: () {
-                    _showDrawerContents = !_showDrawerContents;
-                    if (_showDrawerContents)
-                      _controller.reverse();
-                    else
-                      _controller.forward();
-                  },
-                  currentAccountPicture: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "${snapshot.data.image.isNotEmpty ? snapshot.data.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'}"),
-                  ),
-                );
-
-              return DrawerHeader(
-                child: RaisedButton(
-                  onPressed: () {},
-                  child: Text("Sign In"),
-                ),
-              );
+              // User is logged in
+              if (snapshot.hasData) return _accountHeader(snapshot.data);
+              // Not logged
+              return _guestHeader();
             },
           ),
           Stack(
             children: <Widget>[
               FadeTransition(
-                opacity: _drawerContentsOpacity,
+                opacity: _drawerOpacity,
                 child: _menu(),
               ),
               SlideTransition(
-                position: _drawerDetailsPosition,
+                position: _drawerPosition,
                 child: FadeTransition(
-                  opacity: ReverseAnimation(_drawerContentsOpacity),
+                  opacity: ReverseAnimation(_drawerOpacity),
                   child: _userOptions(),
                 ),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  _accountHeader(User user) {
+    return UserAccountsDrawerHeader(
+      accountName: Text("${user.username}"),
+      accountEmail: Text("${user.email}"),
+      onDetailsPressed: () {
+        _showDrawer = !_showDrawer;
+        if (_showDrawer)
+          _controller.reverse();
+        else
+          _controller.forward();
+      },
+      decoration: BoxDecoration(color: Colors.grey[800]),
+      currentAccountPicture: CircleAvatar(
+        backgroundImage: user.image.isNotEmpty ? 
+        NetworkImage("${user.image}") :
+        AssetImage("images/smiley-cyrus.jpg"),
+      ),
+    );
+  }
+
+  _guestHeader() {
+    return DrawerHeader(
+      child: RaisedButton(
+        onPressed: () {},
+        child: Text("Sign In"),
       ),
     );
   }
@@ -123,14 +132,18 @@ class _RwDrawerState extends State<RwDrawer> with TickerProviderStateMixin {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         ListTile(
-          leading: const Icon(Icons.person_outline),
-          title: const Text('Profile'),
+          leading: Icon(Icons.person_outline),
+          title: Text('Profile'),
           onTap: () {},
         ),
         ListTile(
-          leading: const Icon(Icons.power_settings_new),
-          title: const Text('Logout'),
-          onTap: () {},
+          leading: Icon(Icons.power_settings_new),
+          title: Text('Logout'),
+          onTap: () {
+            authBloc.logout().then((_) {
+              _controller.reverse();
+            });
+          },
         ),
       ],
     );
