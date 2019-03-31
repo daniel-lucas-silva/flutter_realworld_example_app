@@ -18,7 +18,7 @@ class CommentBloc {
 
   void init() {
     _loading = BehaviorSubject<bool>();
-    _items = BehaviorSubject<List<Comment>>(seedValue: []);
+    _items = BehaviorSubject<List<Comment>>();
   }
 
   void dispose() {
