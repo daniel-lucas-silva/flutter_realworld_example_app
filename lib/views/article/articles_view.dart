@@ -21,7 +21,7 @@ class ArticlesView extends StatelessWidget {
               (BuildContext context, int index) {
                 return ArticleCard(
                   onAuthorPressed: (){
-                    push(context, AuthorView(_items[index].author));
+                    push(context, AuthorView());
                   },
                   onCardPressed: (){
                     push(context, ArticleDetail(_items[index]));
