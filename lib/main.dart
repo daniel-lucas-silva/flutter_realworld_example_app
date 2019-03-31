@@ -1,47 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/blocs.dart' show appBloc, authBloc;
-import 'package:realworld/screens.dart' show HomeScreen;
-import 'package:realworld/utils.dart' show storage, request;
+import 'package:flutter/services.dart';
+import 'package:realworld/utils/http.dart';
+import 'package:realworld/utils/storage.dart';
+import 'package:realworld/views/root_view.dart';
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.white,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    statusBarColor: Colors.transparent,
+  ));
+
   final String token = await storage.read(key: "token");
-  request.auth(token);
-  runApp(Conduit(token));
-}
 
-class Conduit extends StatefulWidget {
-  final String token;
+  if(token != null) http.auth(token);
 
-  Conduit(this.token);
-
-  @override
-  _ConduitState createState() => _ConduitState();
-}
-
-class _ConduitState extends State<Conduit> {
-  @override
-  void initState() {
-    appBloc.initState();
-    authBloc.initState();
-
-    if (widget.token != null) authBloc.loadUser();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    appBloc.dispose();
-    authBloc.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Conduit',
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: HomeScreen(),
-    );
-  }
+  runApp(RootView());
 }
