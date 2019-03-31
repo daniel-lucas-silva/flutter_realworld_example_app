@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:realworld/models/article.dart';
+import 'package:realworld/utils/theme.dart';
 import 'package:realworld/views/comment/comment_bloc.dart';
 import 'package:realworld/views/comment/comment_form.dart';
 import 'package:realworld/views/comment/comments_list.dart';
@@ -14,7 +16,6 @@ class ArticleDetail extends StatefulWidget {
 }
 
 class _ArticleDetailState extends State<ArticleDetail> {
-
   CommentBloc _commentBloc;
 
   @override
@@ -84,12 +85,16 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         InkWell(
-                          child: Text(widget.article.author.username,
-                              style: appBarTheme.textTheme.headline),
+                          child: Text(
+                            widget.article.author.username,
+                            style: appBarTheme.textTheme.body1,
+                          ),
                           onTap: () {},
                         ),
-                        Text("February 28, 2019",
-                            style: appBarTheme.textTheme.headline),
+                        Text(
+                          "February 28, 2019",
+                          style: appBarTheme.textTheme.body1,
+                        ),
                       ],
                     ),
                   ),
@@ -114,12 +119,9 @@ class _ArticleDetailState extends State<ArticleDetail> {
     return SliverPadding(
       padding: EdgeInsets.all(15.0),
       sliver: SliverToBoxAdapter(
-        child: Text(
-          '''${widget.article.body}''',
-          style: TextStyle(
-            color: Colors.black54,
-            height: 1.2,
-          ),
+        child: MarkdownBody(
+          data: widget.article.body,
+          styleSheet: markdownStyle,
         ),
       ),
     );

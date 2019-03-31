@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class RwColors {
   static const int _greenPrimaryValue = 0xFF5CB85C;
@@ -43,9 +44,11 @@ ThemeData rwTheme = ThemeData(
   accentColor: RwColors.grey,
   // fontFamily: '',
   textTheme: TextTheme(
-    headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-    title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-    body1: TextStyle(fontSize:14.0),
+    headline: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
+    title: TextStyle(fontSize: 26.0, fontWeight: FontWeight.w600),
+    subhead: TextStyle(fontSize:14.0),
+    body1: TextStyle(fontSize:13.0),
+    body2: TextStyle(fontSize:12.0),
   ),
   appBarTheme: AppBarTheme(
     textTheme: TextTheme(
@@ -62,3 +65,41 @@ ThemeData rwTheme = ThemeData(
     fillColor: Colors.grey[50],
   )
 );
+
+
+var markdownStyle = MarkdownStyleSheet(
+      a: TextStyle(color: RwColors.green[600], decoration: TextDecoration.underline),
+      p: rwTheme.textTheme.body1,
+      code: TextStyle(
+        color: Colors.grey.shade700,
+        fontFamily: "monospace",
+        fontSize: rwTheme.textTheme.body1.fontSize * 0.85
+      ),
+      h1: rwTheme.textTheme.headline,
+      h2: rwTheme.textTheme.title,
+      h3: rwTheme.textTheme.subhead,
+      h4: rwTheme.textTheme.body1,
+      h5: rwTheme.textTheme.body1,
+      h6: rwTheme.textTheme.body1,
+      em: const TextStyle(fontStyle: FontStyle.italic),
+      strong: const TextStyle(fontWeight: FontWeight.bold),
+      blockquote: rwTheme.textTheme.body1,
+      img: rwTheme.textTheme.body1,
+      blockSpacing: 8.0,
+      listIndent: 32.0,
+      blockquotePadding: 10.0,
+      blockquoteDecoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(10.0)
+      ),
+      codeblockPadding: 10.0,
+      codeblockDecoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(10.0)
+      ),
+      horizontalRuleDecoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(width: 5.0, color: Colors.grey.shade300)
+        ),
+      ),
+    );
