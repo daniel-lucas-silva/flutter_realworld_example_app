@@ -29,7 +29,7 @@ class RwCards {
                   onTapUp: onOpenProfile,
                   child: CircleAvatar(
                     radius: 20.0,
-                    backgroundImage: NetworkImage("${author.image}"),
+                    backgroundImage: NetworkImage("${author?.image ?? ""}"),
                   ),
                 ),
                 Expanded(

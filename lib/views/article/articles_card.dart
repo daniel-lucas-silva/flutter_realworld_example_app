@@ -41,6 +41,7 @@ class ArticleCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                     child: CircleAvatar(
                       radius: 20.0,
+                      backgroundColor: Colors.grey[700],
                       backgroundImage:
                           NetworkImage("${article.author?.image ?? ""}"),
                     ),

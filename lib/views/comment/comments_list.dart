@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/models/comment.dart';
 
+import 'comment_card.dart';
 import 'comment_bloc.dart';
 
 class CommentList extends StatelessWidget {
@@ -32,26 +33,37 @@ class CommentList extends StatelessWidget {
 
   getList(List<Comment> items) {
     return SliverList(
-      delegate: SliverChildBuilderDelegate((context, index) {
-        return Text("${items[index].body}");
-      }, childCount: items.length),
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return CommentCard(items[index]);
+        },
+        childCount: items.length,
+      ),
     );
   }
 
   getLoading({double size: 20.0}) {
     return SliverToBoxAdapter(
-      child: Text("Loading"),
+      child: Center(
+        child: Container(
+          margin: EdgeInsets.all(20.0),
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(
+            strokeWidth: 2.0,
+          ),
+        ),
+      ),
     );
   }
 
   getEmpty() {
     return SliverToBoxAdapter(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text("No Comments.", textAlign: TextAlign.center),
-        ],
+      child: Padding(
+        padding: EdgeInsets.only(top: 50.0, bottom: 70.0),
+        child: Center(
+          child: Text("No Comments.", textAlign: TextAlign.center),
+        ),
       ),
     );
   }

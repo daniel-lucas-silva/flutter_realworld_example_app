@@ -53,7 +53,8 @@ ThemeData rwTheme = ThemeData(
   appBarTheme: AppBarTheme(
     textTheme: TextTheme(
       title: TextStyle(fontSize: 22, fontFamily: "Titillium", fontWeight: FontWeight.w700),
-      body1: TextStyle(color: Colors.white)
+      body1: TextStyle(color: Colors.white),
+      body2: TextStyle(color: Colors.white70, fontSize:11.0)
     ),
     iconTheme: IconThemeData(
       color: Colors.white

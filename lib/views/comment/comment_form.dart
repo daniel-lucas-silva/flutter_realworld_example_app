@@ -9,31 +9,45 @@ class CommentForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Card(
-        color: Colors.grey[300],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: () {},
-          child: Row(
-            children: <Widget>[
-              Container(width: 5),
-              CircleAvatar(),
-              Container(width: 10),
-              Expanded(
-                child: Text("Type your comment...", style: TextStyle(color: Colors.grey[800])),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Card(
+            color: Colors.grey[200],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50.0),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              onTap: () {
+
+              },
+              child: Row(
+                children: <Widget>[
+                  Container(width: 5),
+                  CircleAvatar(),
+                  Container(width: 10),
+                  Expanded(
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hintText: "Write a comment...",
+                      filled: false,
+                      border: InputBorder.none
+                    ),
+                  ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.send),
+                    onPressed: () {
+                      
+                    },
+                  )
+                ],
               ),
-              IconButton(
-                icon: Icon(Icons.send),
-                onPressed: () {},
-              )
-            ],
+            ),
           ),
-        ),
-      ),
+      ],
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:realworld/models/article.dart';
+import 'package:realworld/utils/date.dart';
 import 'package:realworld/utils/theme.dart';
 import 'package:realworld/views/comment/comment_bloc.dart';
 import 'package:realworld/views/comment/comment_form.dart';
@@ -37,13 +38,23 @@ class _ArticleDetailState extends State<ArticleDetail> {
     return Stack(
       children: <Widget>[
         Scaffold(
-          body: CustomScrollView(
-            slivers: <Widget>[
-              getAppBar(),
-              getBody(),
-              getCommentsHeader(),
-              CommentForm(_commentBloc),
-              CommentList(_commentBloc),
+          body: Stack(
+            children: <Widget>[
+              CustomScrollView(
+                slivers: <Widget>[
+                  getAppBar(),
+                  getBody(),
+                  getCommentsHeader(),
+                  SliverPadding(
+                    padding: EdgeInsets.only(bottom: 80),
+                    sliver: CommentList(_commentBloc),
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CommentForm(_commentBloc),
+              )
             ],
           ),
         ),
@@ -92,8 +103,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
                           onTap: () {},
                         ),
                         Text(
-                          "February 28, 2019",
-                          style: appBarTheme.textTheme.body1,
+                          "${timeago(widget.article.createdAt)}",
+                          style: appBarTheme.textTheme.body2,
                         ),
                       ],
                     ),
@@ -128,6 +139,26 @@ class _ArticleDetailState extends State<ArticleDetail> {
   }
 
   getCommentsHeader() {
-    return SliverToBoxAdapter(child: Text("Comments"));
+    return SliverToBoxAdapter(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              height: 1,
+              color: Colors.grey[400],
+              margin: EdgeInsets.symmetric(horizontal: 10),
+            ),
+          ),
+          Text("Comments"),
+          Expanded(
+            child: Container(
+              height: 1,
+              color: Colors.grey[400],
+              margin: EdgeInsets.symmetric(horizontal: 10),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
