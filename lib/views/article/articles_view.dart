@@ -15,6 +15,7 @@ class ArticlesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: <Widget>[
         SliverList(
             delegate: SliverChildBuilderDelegate(

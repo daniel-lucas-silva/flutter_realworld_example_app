@@ -14,9 +14,25 @@ class HomeView extends StatefulWidget {
   _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
 
-  HomeState _currentState = HomeState.GLOBAL;
+
+  final List<Widget> _tabs = [
+    GlobalFeedView(),
+    MyFeedView(),
+    ProfileView(),
+  ];
+
+  PageController _tabController;
+  int _index;
+  bool isAuthenticated = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = PageController(keepPage: true);
+    _index = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +53,24 @@ class _HomeViewState extends State<HomeView> {
   }
 
   getBody() {
-    switch (_currentState) {
-      case HomeState.GLOBAL:
-        return GlobalFeedView();
-      case HomeState.MY:
-        return new MyFeedView();
-      case HomeState.PROFILE:
-        return ProfileView();
-      default:
-        throw new StateError('Unexpected action [$_currentState]');
-    }
+
+    return PageView(
+        children: _tabs,
+        controller: _tabController,
+        physics: NeverScrollableScrollPhysics(),
+      );
   }
 
   getBottom() {
     return HomeBottom(
       onChange: (index) {
+        _tabController.jumpToPage(index);
         setState(() {
-          _currentState = HomeState.values[index];
+          _index = index;
         });
       },
-      isAuthenticated: false,
-      index: _currentState.index,
+      isAuthenticated: isAuthenticated,
+      index: _index,
     );
   }
 }

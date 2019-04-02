@@ -11,20 +11,19 @@ class GlobalFeedView extends StatefulWidget {
 
 class _GlobalFeedViewState extends State<GlobalFeedView> with AutomaticKeepAliveClientMixin<GlobalFeedView> {
 
-  GlobalFeedBloc _bloc;
+  GlobalFeedBloc _bloc = GlobalFeedBloc();
 
   @override
   void initState() {
-    _bloc = GlobalFeedBloc();
+    super.initState();
     _bloc.init();
     _bloc.fetchAll();
-    super.initState();
   }
 
   @override
   void dispose() {
-    _bloc.dispose();
     super.dispose();
+    _bloc.dispose();
   }
 
   @override

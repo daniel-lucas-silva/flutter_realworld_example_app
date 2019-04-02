@@ -25,7 +25,7 @@ class GlobalFeedBloc {
     _items.close();
   }
 
-  Future<Response<dynamic>> fetchAll() async {
+  Future<bool> fetchAll() async {
     try {
       Response result = await _service.all();
 
@@ -35,11 +35,9 @@ class GlobalFeedBloc {
 
       _items.sink.add(List<Article>.from(articles));
 
-      return Future.value(result);
+      return true;
     } catch (e) {
-      if (e?.response?.statusCode == 404) _items.sink.addError("No records");
-      // throw (e);
-      return Future.error(e);
+      throw (e);
     }
   }
 
