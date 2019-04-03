@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:realworld/utils/navigate.dart';
 import 'package:realworld/utils/theme.dart';
 import 'package:realworld/views/auth/register_view.dart';
+import 'package:realworld/views/login_bloc.dart';
+import 'package:realworld/views/login_form.dart';
 
 enum DialogAction {
   cancel,
@@ -9,10 +11,10 @@ enum DialogAction {
   login,
 }
 
-class LoginForm {
-  static void show(BuildContext profileContext) {
+class LoginDialog {
+  LoginDialog(BuildContext parentContext, {Function() callback}) {
     showDialog(
-      context: profileContext,
+      context: parentContext,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Row(
@@ -30,41 +32,22 @@ class LoginForm {
           titlePadding:
               EdgeInsets.only(left: 25, top: 10, bottom: 10, right: 7),
           contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Email",
-                    isDense: false,
-                  ),
-                ),
-                SizedBox(height: 15),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Password",
-                    isDense: false,
-                  ),
-                )
-              ],
-            ),
-          ),
+          content: LoginForm(),
           actions: <Widget>[
             FlatButton(
               child: Text('Need an account?'),
               textColor: RwColors.green,
               onPressed: () {
                 Navigator.pop(context, DialogAction.register);
-                push(context, RegisterView(profileContext));
+                push(context, RegisterView(parentContext));
               },
             ),
             FlatButton(
               child: Text('LOGIN'),
               onPressed: () {
-                Navigator.pop(context, DialogAction.login);
+                loginBloc.login().then((_) {
+                  Navigator.pop(context, DialogAction.login);
+                });
               },
             ),
           ],
@@ -72,6 +55,6 @@ class LoginForm {
       },
     ).then<void>((value) {
       print(value);
-    }); 
+    });
   }
 }

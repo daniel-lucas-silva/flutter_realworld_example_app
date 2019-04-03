@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realworld/utils/navigate.dart';
 import 'package:realworld/utils/theme.dart';
 import 'package:realworld/views/auth/register_view.dart';
-import 'package:realworld/views/home/profile/login_form.dart';
-
-enum DialogAction {
-  cancel,
-  login,
-}
+import 'package:realworld/views/login_dialog.dart';
 
 class ProfileView extends StatefulWidget {
   final GlobalKey<ScaffoldState> key;
@@ -47,7 +42,7 @@ class _ProfileViewState extends State<ProfileView>
             RaisedButton(
               child: Text("Sign In"),
               onPressed: () {
-                LoginForm.show(context);
+                LoginDialog(context);
               },
               textColor: Colors.white,
             ),

@@ -6,6 +6,7 @@ import 'package:realworld/utils/theme.dart';
 import 'package:realworld/views/comment/comment_bloc.dart';
 import 'package:realworld/views/comment/comment_form.dart';
 import 'package:realworld/views/comment/comments_list.dart';
+import 'package:realworld/views/login_dialog.dart';
 
 class ArticleDetail extends StatefulWidget {
   final Article article;
@@ -23,7 +24,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
   void initState() {
     _commentBloc = CommentBloc();
     _commentBloc.init();
-    _commentBloc.load(widget.article.slug);
+    _commentBloc.load(widget.article.slug); 
     super.initState();
   }
 
@@ -110,7 +111,9 @@ class _ArticleDetailState extends State<ArticleDetail> {
                     ),
                   ),
                   OutlineButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      LoginDialog(context);
+                    },
                     icon: Icon(Icons.add),
                     label: Text("Follow"),
                     textColor: Colors.white,

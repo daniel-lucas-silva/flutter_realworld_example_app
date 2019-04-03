@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:realworld/views/home/profile/login_form.dart';
+import 'package:realworld/views/login_dialog.dart';
 
 class RegisterView extends StatefulWidget {
 
-  final BuildContext profileContext;
+  final BuildContext parentContext;
 
-  RegisterView(this.profileContext);
+  RegisterView(this.parentContext);
 
   @override
   _RegisterViewState createState() => _RegisterViewState();
@@ -44,7 +44,7 @@ class _RegisterViewState extends State<RegisterView> {
                   child: Text("Have an account?"),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    LoginForm.show(widget.profileContext);
+                    LoginDialog(widget.parentContext);
                   },
                 ),
                 RaisedButton(
