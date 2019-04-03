@@ -16,20 +16,23 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final List<Widget> _tabs = [
-    GlobalFeedView(),
-    MyFeedView(),
-    ProfileView(),
-  ];
+  
 
   PageController _tabController;
   int _index;
   bool isAuthenticated = true;
+  List<Widget> _tabs;
 
   @override
   void initState() {
     super.initState();
+    _tabs = [
+      GlobalFeedView(),
+      MyFeedView(),
+      ProfileView(key: _scaffoldKey),
+    ];
     _tabController = PageController(keepPage: true);
     _index = 0;
   }

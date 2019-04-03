@@ -8,7 +8,7 @@ class RwColors {
   static const MaterialColor green = MaterialColor(
     _greenPrimaryValue,
     <int, Color>{
-       50: Color(0xFFA6D8A6),
+      50: Color(0xFFA6D8A6),
       100: Color(0xFF97D197),
       200: Color(0xFF88CB88),
       300: Color(0xFF79C479),
@@ -24,7 +24,7 @@ class RwColors {
   static const MaterialColor grey = MaterialColor(
     _greyPrimaryValue,
     <int, Color>{
-       50: Color(0xFFBABFC3),
+      50: Color(0xFFBABFC3),
       100: Color(0xFFAEB4B9),
       200: Color(0xFFA3A9AF),
       300: Color(0xFF979FA5),
@@ -46,61 +46,74 @@ ThemeData rwTheme = ThemeData(
   textTheme: TextTheme(
     headline: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
     title: TextStyle(fontSize: 26.0, fontWeight: FontWeight.w600),
-    subhead: TextStyle(fontSize:14.0),
-    body1: TextStyle(fontSize:13.0),
-    body2: TextStyle(fontSize:12.0),
+    subhead: TextStyle(fontSize: 14.0),
+    body1: TextStyle(fontSize: 13.0),
+    body2: TextStyle(fontSize: 12.0),
   ),
   appBarTheme: AppBarTheme(
-    textTheme: TextTheme(
-      title: TextStyle(fontSize: 22, fontFamily: "Titillium", fontWeight: FontWeight.w700),
-      body1: TextStyle(color: Colors.white),
-      body2: TextStyle(color: Colors.white70, fontSize:11.0)
-    ),
-    iconTheme: IconThemeData(
-      color: Colors.white
-    )
-  ),
+      textTheme: TextTheme(
+        title: TextStyle(
+          fontSize: 22,
+          fontFamily: "Titillium",
+          fontWeight: FontWeight.w700,
+        ),
+        body1: TextStyle(color: Colors.white),
+        body2: TextStyle(color: Colors.white70, fontSize: 11.0),
+      ),
+      iconTheme: IconThemeData(color: Colors.white)),
   inputDecorationTheme: InputDecorationTheme(
-    isDense: true,
     filled: true,
-    fillColor: Colors.grey[50],
-  )
+    fillColor: Color(0xAAECEFF1),
+  ),
+  buttonTheme: ButtonThemeData(
+    buttonColor: RwColors.green,
+    textTheme: ButtonTextTheme.primary,
+    layoutBehavior: ButtonBarLayoutBehavior.padded,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+    padding: EdgeInsets.all(15),
+  ),
+  dialogTheme: DialogTheme(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(7.0),
+    ),
+    titleTextStyle: TextStyle(
+      fontSize: 28,
+      fontFamily: "Titillium",
+      fontWeight: FontWeight.w600,
+      color: RwColors.grey[800]
+    ),
+  ),
 );
 
-
 var markdownStyle = MarkdownStyleSheet(
-      a: TextStyle(color: RwColors.green[600], decoration: TextDecoration.underline),
-      p: rwTheme.textTheme.body1,
-      code: TextStyle(
-        color: Colors.grey.shade700,
-        fontFamily: "monospace",
-        fontSize: rwTheme.textTheme.body1.fontSize * 0.85
-      ),
-      h1: rwTheme.textTheme.headline,
-      h2: rwTheme.textTheme.title,
-      h3: rwTheme.textTheme.subhead,
-      h4: rwTheme.textTheme.body1,
-      h5: rwTheme.textTheme.body1,
-      h6: rwTheme.textTheme.body1,
-      em: const TextStyle(fontStyle: FontStyle.italic),
-      strong: const TextStyle(fontWeight: FontWeight.bold),
-      blockquote: rwTheme.textTheme.body1,
-      img: rwTheme.textTheme.body1,
-      blockSpacing: 8.0,
-      listIndent: 32.0,
-      blockquotePadding: 10.0,
-      blockquoteDecoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(10.0)
-      ),
-      codeblockPadding: 10.0,
-      codeblockDecoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(10.0)
-      ),
-      horizontalRuleDecoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(width: 5.0, color: Colors.grey.shade300)
-        ),
-      ),
-    );
+  a: TextStyle(
+      color: RwColors.green[600], decoration: TextDecoration.underline),
+  p: rwTheme.textTheme.body1,
+  code: TextStyle(
+      color: Colors.grey.shade700,
+      fontFamily: "monospace",
+      fontSize: rwTheme.textTheme.body1.fontSize * 0.85),
+  h1: rwTheme.textTheme.headline,
+  h2: rwTheme.textTheme.title,
+  h3: rwTheme.textTheme.subhead,
+  h4: rwTheme.textTheme.body1,
+  h5: rwTheme.textTheme.body1,
+  h6: rwTheme.textTheme.body1,
+  em: const TextStyle(fontStyle: FontStyle.italic),
+  strong: const TextStyle(fontWeight: FontWeight.bold),
+  blockquote: rwTheme.textTheme.body1,
+  img: rwTheme.textTheme.body1,
+  blockSpacing: 8.0,
+  listIndent: 32.0,
+  blockquotePadding: 10.0,
+  blockquoteDecoration: BoxDecoration(
+      color: Colors.grey[200], borderRadius: BorderRadius.circular(10.0)),
+  codeblockPadding: 10.0,
+  codeblockDecoration: BoxDecoration(
+      color: Colors.grey.shade100, borderRadius: BorderRadius.circular(10.0)),
+  horizontalRuleDecoration: BoxDecoration(
+    border: Border(top: BorderSide(width: 5.0, color: Colors.grey.shade300)),
+  ),
+);
