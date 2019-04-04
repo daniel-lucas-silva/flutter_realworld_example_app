@@ -14,6 +14,7 @@ class _RootViewState extends State<RootView> {
   @override
   void initState() {
     rootBloc.initState();
+    authenticate();
     super.initState();
   }
 
