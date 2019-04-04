@@ -60,6 +60,7 @@ class _LoginFormState extends State<LoginForm> {
       builder: (context, snapshot) {
         return TextField(
           onChanged: loginBloc.changePassword,
+          obscureText: true,
           decoration: InputDecoration(
             hintText: 'Password',
             labelText: 'Password',
