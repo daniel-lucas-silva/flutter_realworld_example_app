@@ -59,4 +59,44 @@ class _ProfileViewState extends State<ProfileView>
     );
   }
 
+  authView() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 50),
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: Center(
+                child: Text(
+                  "Conduite",
+                  style: TextStyle(
+                      color: RwColors.green,
+                      fontSize: 40,
+                      fontFamily: "Titillium",
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+            RaisedButton(
+              child: Text("Sign In"),
+              onPressed: () {
+                LoginDialog(context);
+              },
+              textColor: Colors.white,
+            ),
+            SizedBox(height: 10),
+            FlatButton(
+              child: Text("Sign Up"),
+              onPressed: () {
+                push(context, RegisterView(context));
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
 }

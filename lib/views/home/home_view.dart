@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realworld/views/root_bloc.dart';
 // components
 import 'home_drawer.dart';
 import 'home_bottom.dart';
@@ -22,28 +23,43 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
 
   PageController _tabController;
   int _index;
-  bool isAuthenticated = true;
+  bool isAuthenticated = false;
   List<Widget> _tabs;
 
   @override
   void initState() {
     super.initState();
-    _tabs = [
-      GlobalFeedView(),
-      MyFeedView(),
-      ProfileView(key: _scaffoldKey),
-    ];
     _tabController = PageController(keepPage: true);
     _index = 0;
   }
 
   @override
   Widget build(BuildContext context) {
+
+    _tabs = [
+      GlobalFeedView(),
+      MyFeedView(),
+    ];
+
+    rootBloc.authenticated.listen((logged) {
+      if(logged) setState(() {
+        isAuthenticated = true;
+      });
+    });
+
+    if(!isAuthenticated) _tabs.removeAt(1);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Conduite"),
         centerTitle: true,
         brightness: Brightness.dark,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: (){},
+          ),
+        ],
       ),
       drawer: HomeDrawer(),
       body: Stack(
@@ -72,7 +88,6 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
           _index = index;
         });
       },
-      isAuthenticated: isAuthenticated,
       index: _index,
     );
   }
