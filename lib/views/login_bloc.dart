@@ -47,7 +47,7 @@ class LoginBloc {
     }
 
     if (validEmail.isNotEmpty && validPassword.isNotEmpty) {
-      print("object");
+      print("valid");
       _loading.sink.add(true);
 
       var credentials = {

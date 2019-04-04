@@ -43,6 +43,8 @@ class RootBloc {
   Future<bool> loadUser() async {
     _loading.sink.add(true);
 
+    print("logged");
+
     try {
         Response response = await AuthService.current();
 
