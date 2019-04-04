@@ -5,9 +5,8 @@ class HomeBottom extends StatefulWidget {
 
   final Function(int) onChange;
   final int index;
-  final bool isAuthenticated;
 
-  HomeBottom({ this.onChange, this.index: 0, this.isAuthenticated: true });
+  HomeBottom({ this.onChange, this.index: 0 });
   
   @override
   _HomeBottomState createState() => _HomeBottomState();
@@ -28,10 +27,7 @@ class _HomeBottomState extends State<HomeBottom> {
     List<BottomNavigationBarItem> tabs = [
       _tabItem('Global Feed', Icon(Icons.public)),
       _tabItem('Your Feed', Icon(Icons.person_add)),
-      _tabItem('Profile', Icon(Icons.account_circle)),
     ];
-
-    if(!widget.isAuthenticated) tabs.removeAt(1);
 
     return MediaQuery.of(context).viewInsets.bottom == 0
         ? Align(
