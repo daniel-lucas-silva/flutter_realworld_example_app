@@ -28,7 +28,7 @@ class GlobalFeedBloc {
   Future<bool> fetchAll() async {
     try {
       Response result = await _service.all();
-
+      print(result.data["articles"]);
       var articles = result.data["articles"]
           .map((article) => Article.fromJson(article))
           .toList();

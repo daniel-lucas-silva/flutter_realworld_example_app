@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:realworld/utils/navigate.dart';
+import 'package:realworld/views/login_dialog.dart';
+import 'package:realworld/views/profile/profile_view.dart';
 import 'package:realworld/views/root_bloc.dart';
 // components
 import 'home_drawer.dart';
 import 'home_bottom.dart';
 // tabs
 import 'my_feed/my_feed_view.dart';
-import 'profile/profile_view.dart';
 import 'global_feed/global_feed_view.dart';
 
 enum HomeState { GLOBAL, MY, PROFILE }
@@ -15,11 +17,9 @@ class HomeView extends StatefulWidget {
   _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
-
+class _HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  
 
   PageController _tabController;
   int _index;
@@ -35,19 +35,19 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-
     _tabs = [
       GlobalFeedView(),
       MyFeedView(),
     ];
 
     rootBloc.authenticated.listen((logged) {
-      if(logged) setState(() {
-        isAuthenticated = true;
-      });
+      if (logged)
+        setState(() {
+          isAuthenticated = true;
+        });
     });
 
-    if(!isAuthenticated) _tabs.removeAt(1);
+    if (!isAuthenticated) _tabs.removeAt(1);
 
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +57,15 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.account_circle),
-            onPressed: (){},
+            onPressed: () {
+              if(rootBloc.authenticated.value) {
+                push(context, ProfileView());
+              } else {
+                LoginDialog(context, callback: () {
+                  push(context, ProfileView());
+                });
+              }
+            },
           ),
         ],
       ),
@@ -72,23 +80,30 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
   }
 
   getBody() {
-
     return PageView(
-        children: _tabs,
-        controller: _tabController,
-        physics: NeverScrollableScrollPhysics(),
-      );
+      children: _tabs,
+      controller: _tabController,
+      physics: NeverScrollableScrollPhysics(),
+    );
   }
 
   getBottom() {
-    return HomeBottom(
-      onChange: (index) {
-        _tabController.jumpToPage(index);
-        setState(() {
-          _index = index;
-        });
+    return StreamBuilder(
+      stream: rootBloc.authenticated,
+      initialData: false,
+      builder: (context, snapshot) {
+        return snapshot.data
+            ? HomeBottom(
+                onChange: (index) {
+                  _tabController.jumpToPage(index);
+                  setState(() {
+                    _index = index;
+                  });
+                },
+                index: _index,
+              )
+            : Container();
       },
-      index: _index,
     );
   }
 }

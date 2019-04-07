@@ -47,6 +47,7 @@ class LoginDialog {
               onPressed: () {
                 loginBloc.login().then((_) {
                   Navigator.pop(context, DialogAction.login);
+                  callback();
                 });
               },
             ),

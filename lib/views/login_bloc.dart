@@ -78,7 +78,7 @@ class LoginBloc {
       } catch (e) {
         _loading.sink.add(false);
         _email.sink.addError("");
-        // throw (e);
+        throw (e);
       }
     }
     return Future.error("");

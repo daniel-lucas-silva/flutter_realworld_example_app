@@ -8,8 +8,13 @@ class AuthorView extends StatefulWidget {
 class _AuthorViewState extends State<AuthorView> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey[100],
+        iconTheme: IconThemeData(
+          color: Colors.black
+        ),
+      ),
     );
   }
 }

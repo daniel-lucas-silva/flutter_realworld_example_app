@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/views/login_dialog.dart';
+import 'package:realworld/views/root_bloc.dart';
 
 import 'comment_bloc.dart';
 
-class CommentForm extends StatelessWidget {
+class CommentForm extends StatefulWidget {
   final CommentBloc _bloc;
 
   CommentForm(this._bloc);
+
+  @override
+  _CommentFormState createState() => _CommentFormState();
+}
+
+class _CommentFormState extends State<CommentForm> {
+  FocusNode _focus;
+
+  @override
+  void initState() {
+    _focus = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +41,7 @@ class CommentForm extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           child: InkWell(
             onTap: () {
-              LoginDialog(context);
+              
             },
             child: Row(
               children: <Widget>[
@@ -30,8 +50,13 @@ class CommentForm extends StatelessWidget {
                 SizedBox(width: 10),
                 Expanded(
                   child: TextField(
+                    onTap: () {
+                      if(!rootBloc.authenticated.value){
+                        FocusScope.of(context).detach();
+                        LoginDialog(context);
+                      }
+                    },
                     keyboardType: TextInputType.text,
-                    enabled: false,
                     decoration: InputDecoration(
                         hintText: "Write a comment...",
                         filled: false,
@@ -49,4 +74,9 @@ class CommentForm extends StatelessWidget {
       ],
     );
   }
+}
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
 }

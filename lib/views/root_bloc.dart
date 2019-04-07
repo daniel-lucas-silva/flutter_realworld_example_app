@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:realworld/models/user.dart';
 import 'package:realworld/services/auth.service.dart';
+import 'package:realworld/utils/storage.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RootBloc {
@@ -12,13 +13,13 @@ class RootBloc {
   BehaviorSubject<User> _user;
 
   Observable<bool> get loading => _loading.stream;
-  Observable<bool> get authenticated => _authenticated.stream;
-  Observable<User> get user => _user.stream;
+  ValueObservable<bool> get authenticated => _authenticated.stream;
+  Stream<User> get user => _user.stream;
 
   void initState() {
     _loading = BehaviorSubject<bool>(seedValue: false);
     _authenticated = BehaviorSubject<bool>(seedValue: false);
-    _user = BehaviorSubject<User>(seedValue: User());
+    _user = BehaviorSubject<User>();
   }
 
   void dispose() {
@@ -47,17 +48,23 @@ class RootBloc {
 
     try {
         Response response = await AuthService.current();
-
+        print(response.data['user']);
         _user.sink.add(User.fromJson(response.data['user']));
         _authenticated.sink.add(true);
         _loading.sink.add(false);
-        
         return true;
       } catch (e) {
         _loading.sink.add(false);
         _user.sink.addError("Some Error");
         throw (e);
       }
+  }
+
+  Future<bool> logout() async {
+    _user.sink.add(null);
+    await storage.delete(key: "token");
+    setAuthenticated(false);
+    return true;
   }
 }
 
