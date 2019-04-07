@@ -51,11 +51,19 @@ class _HomeViewState extends State<HomeView>
     if (!isAuthenticated) _tabs.removeAt(1);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.create),
-        backgroundColor: RwColors.green,
-        mini: true,
+      floatingActionButton: StreamBuilder<bool>(
+        stream: rootBloc.authenticated,
+        initialData: false,
+        builder: (context, AsyncSnapshot<bool> snapshot) {
+          return snapshot.data
+              ? FloatingActionButton(
+                  onPressed: () {},
+                  child: Icon(Icons.create),
+                  backgroundColor: RwColors.green,
+                  mini: true,
+                )
+              : Container();
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
@@ -66,7 +74,7 @@ class _HomeViewState extends State<HomeView>
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              if(rootBloc.authenticated.value) {
+              if (rootBloc.authenticated.value) {
                 push(context, ProfileView());
               } else {
                 LoginDialog(context, callback: () {
