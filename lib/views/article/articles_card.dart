@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/models/article.dart';
+import 'package:realworld/utils/date.dart';
+import 'package:realworld/utils/theme.dart';
 
 class ArticleCard extends StatelessWidget {
   final Article article;
@@ -57,7 +59,7 @@ class ArticleCard extends StatelessWidget {
                             onTap: onAuthorPressed,
                           ),
                           Text(
-                            "a day ago",
+                            "${timeago(article.createdAt)}",
                             style:
                                 TextStyle(fontSize: 12.0, color: Colors.black54),
                           ),
@@ -114,8 +116,8 @@ class _FavoriteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ink(
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.green),
+        color: favorited ? RwColors.green : Colors.white,
+        border: Border.all(color: RwColors.green),
         borderRadius: BorderRadius.circular(3.0),
       ),
       child: InkWell(
@@ -135,15 +137,15 @@ class _FavoriteButton extends StatelessWidget {
                           child: CircularProgressIndicator(strokeWidth: 2.0),
                         )
                       : Icon(
-                          Icons.favorite_border,
+                          Icons.favorite,
                           size: 20.0,
-                          color: Colors.green,
+                          color: favorited ? Colors.white : RwColors.green,
                         ),
                 ),
                 Container(width: 2),
                 Text(
                   "$count",
-                  style: TextStyle(color: Colors.green),
+                  style: TextStyle(color: favorited ? Colors.white : RwColors.green),
                 )
               ],
             ),
