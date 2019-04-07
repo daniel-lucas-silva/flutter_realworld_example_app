@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:realworld/views/login_dialog.dart';
 
 class RegisterView extends StatefulWidget {
-
   final BuildContext parentContext;
 
   RegisterView(this.parentContext);
@@ -17,21 +16,29 @@ class _RegisterViewState extends State<RegisterView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Sign Up"),
+        brightness: Brightness.dark,
       ),
       body: Container(
         child: ListView(
           padding: EdgeInsets.all(10.0),
           children: <Widget>[
             TextField(
-              decoration: InputDecoration(labelText: "Username"),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: InputDecoration(labelText: "Email"),
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.person_outline),
+                labelText: "Username",
+              ),
             ),
             SizedBox(height: 10),
             TextField(
               decoration: InputDecoration(
+                prefixIcon: Icon(Icons.mail_outline),
+                labelText: "Email",
+              ),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.lock_outline),
                 labelText: "Password",
               ),
               obscureText: true,

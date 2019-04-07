@@ -44,6 +44,7 @@ class _LoginFormState extends State<LoginForm> {
           onChanged: loginBloc.changeEmail,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
+            prefixIcon: Icon(Icons.person_outline),
             hintText: 'you@example.com',
             labelText: 'E-mail Address',
             errorText: snapshot.error,
@@ -62,6 +63,7 @@ class _LoginFormState extends State<LoginForm> {
           onChanged: loginBloc.changePassword,
           obscureText: true,
           decoration: InputDecoration(
+            prefixIcon: Icon(Icons.lock_outline),
             hintText: 'Password',
             labelText: 'Password',
             errorText: snapshot.error,

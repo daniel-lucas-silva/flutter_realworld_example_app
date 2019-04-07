@@ -41,7 +41,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           ListTile(
             title: Text("Daniel Lucas Silva"),
-            subtitle: Text("https://github.com/daniel-lucas-silva"),
+            subtitle: Text("https://github.com/daniel-lucas-silva\nContribute !!!"),
             dense: true,
           )
         ],
