@@ -115,7 +115,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         "${snapshot.data.image.isNotEmpty ? snapshot.data.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'}"),
                     backgroundColor: Colors.grey[800],
                   ),
-                  decoration: BoxDecoration(color: RwColors.green[600]),
+                  decoration: BoxDecoration(color: Colors.blueGrey[900]),
                 )
               : Container();
         },
