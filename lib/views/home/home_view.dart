@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/utils/navigate.dart';
+import 'package:realworld/utils/theme.dart';
 import 'package:realworld/views/login_dialog.dart';
 import 'package:realworld/views/profile/profile_view.dart';
 import 'package:realworld/views/root_bloc.dart';
@@ -50,6 +51,13 @@ class _HomeViewState extends State<HomeView>
     if (!isAuthenticated) _tabs.removeAt(1);
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.create),
+        backgroundColor: RwColors.green,
+        mini: true,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text("Conduite"),
         centerTitle: true,
