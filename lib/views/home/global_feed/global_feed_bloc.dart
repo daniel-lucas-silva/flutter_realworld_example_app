@@ -12,8 +12,6 @@ class GlobalFeedBloc {
   // observables
   Observable<bool> get loading => _loading.stream;
   Observable<List<Article>> get items => _items.stream;
-  // services
-  final ArticlesService _service = ArticlesService();
 
   void init() {
     _loading = BehaviorSubject<bool>();
@@ -27,7 +25,7 @@ class GlobalFeedBloc {
 
   Future<bool> fetchAll() async {
     try {
-      Response result = await _service.all();
+      Response result = await ArticlesService.all();
       print(result.data["articles"]);
       var articles = result.data["articles"]
           .map((article) => Article.fromJson(article))
@@ -43,7 +41,7 @@ class GlobalFeedBloc {
 
   fetchByAuthor(String author) async {
     try {
-      Response result = await _service.byAuthor(author);
+      Response result = await ArticlesService.byAuthor(author);
 
       var articles = result.data["articles"]
           .map((article) => Article.fromJson(article))
@@ -60,7 +58,7 @@ class GlobalFeedBloc {
 
   fetchByTag(String tag) async {
     try {
-      Response result = await _service.byTag(tag);
+      Response result = await ArticlesService.byTag(tag);
 
       var articles = result.data["articles"]
           .map((article) => Article.fromJson(article))
