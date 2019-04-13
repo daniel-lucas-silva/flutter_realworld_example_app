@@ -1,11 +1,11 @@
 import 'package:realworld/utils/http.dart';
 
 class ArticlesService {
-  static all({int page, int lim: 10}) async => await http.get('/articles?${_limit(lim, page)}');
+  static all({int page, int lim: 50}) async => await http.get('/articles?${_limit(lim, page)}');
 
   static byAuthor(String author, {int page}) async => await http.get('/articles?author=$author&${_limit(5, page)}');
 
-  static byTag(String tag, {int page, int lim: 10}) async => await http.get('/articles?tag=$tag&${_limit(lim, page)}');
+  static byTag(String tag, {int page, int lim: 50}) async => await http.get('/articles?tag=$tag&${_limit(lim, page)}');
 
   static del(String slug) async => await http.delete('/articles/$slug');
 
@@ -13,7 +13,7 @@ class ArticlesService {
 
   static favoritedBy(String author, {int page}) async => await http.get('/articles?favorited=$author&${_limit(5, page)}');
 
-  static feed() async => await http.get('/articles/feed?limit=10&offset=0');
+  static feed() async => await http.get('/articles/feed?limit=50&offset=0');
 
   static get(slug) async => await http.get('/articles/$slug');
 

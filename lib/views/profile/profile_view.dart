@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/utils/theme.dart';
 
+import 'favorite_articles.dart';
+import 'my_articles.dart';
+import 'profile_bloc.dart';
+
 class ProfileView extends StatefulWidget {
   @override
   _ProfileViewState createState() => _ProfileViewState();
 }
 
 class _ProfileViewState extends State<ProfileView> {
+
+  @override
+  initState() {
+    profileBloc.init();
+    super.initState();
+  }
+
+  @override
+  dispose() {
+    profileBloc.dispose();
+    super.dispose();
+  }
+
   List<String> _tabs = ["My Articles", "Favorited Articles"];
 
   @override
@@ -71,7 +88,10 @@ class _ProfileViewState extends State<ProfileView> {
                       children: <Widget>[
                         Icon(Icons.settings, size: 14, color: Colors.grey[600]),
                         SizedBox(width: 10),
-                        Text("Edit Profile Settings", style: TextStyle(color: Colors.grey[600]),)
+                        Text(
+                          "Edit Profile Settings",
+                          style: TextStyle(color: Colors.grey[600]),
+                        )
                       ],
                     ),
                   ),
@@ -103,38 +123,10 @@ class _ProfileViewState extends State<ProfileView> {
 
   _buildTabView(context) {
     return TabBarView(
-      children: _tabs.map((String name) {
-        return SafeArea(
-          top: false,
-          bottom: false,
-          child: Builder(
-            builder: (BuildContext context) {
-              return CustomScrollView(
-                key: PageStorageKey<String>(name),
-                slivers: <Widget>[
-                  SliverOverlapInjector(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                        context),
-                  ),
-                  SliverPadding(
-                    padding: const EdgeInsets.all(8.0),
-                    sliver: SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
-                          return GestureDetector(
-                            onTapUp: (_) {},
-                            child: Text("article"),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        );
-      }).toList(),
+      children: <Widget>[
+        MyArticles(),
+        FavoriteArticles(),
+      ],
     );
   }
 }
