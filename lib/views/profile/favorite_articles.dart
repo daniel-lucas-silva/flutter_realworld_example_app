@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:realworld/views/article/articles_view.dart';
+
+import 'profile_bloc.dart';
 
 class FavoriteArticles extends StatefulWidget {
   @override
   _FavoriteArticlesState createState() => _FavoriteArticlesState();
 }
 
-class _FavoriteArticlesState extends State<FavoriteArticles> {
+class _FavoriteArticlesState extends State<FavoriteArticles> with AutomaticKeepAliveClientMixin<FavoriteArticles> {
+
+  @override
+  void initState() {
+    profileBloc.fetchFavoriteArticles();
+    super.initState();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      key: PageStorageKey<String>("favorite_articles"),
-      slivers: <Widget>[
-        SliverOverlapInjector(
-          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-        ),
-        SliverPadding(
-          padding: const EdgeInsets.all(8.0),
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                return GestureDetector(
-                  onTapUp: (_) {},
-                  child: Text("article"),
-                );
-              },
-            ),
+
+    return StreamBuilder(
+      stream: profileBloc.favoriteArticles,
+      initialData: <Article> [],
+      builder: (context, AsyncSnapshot<List<Article>> snapshot) {
+        return ArticlesView(
+          snapshot.data,
+          pageKey: "favorite_articles",
+          overlapInjector: SliverOverlapInjector(
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

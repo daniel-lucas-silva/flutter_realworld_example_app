@@ -2,12 +2,16 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:realworld/models/article.dart';
+import 'package:realworld/models/user.dart';
 import 'package:realworld/services/articles.service.dart';
+import 'package:realworld/views/root_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 export 'package:realworld/models/article.dart';
 
 class ProfileBloc {
+
+  User user;
   // controllers
   BehaviorSubject<bool> _loading;
   BehaviorSubject<List<Article>> _myArticles;
@@ -19,6 +23,7 @@ class ProfileBloc {
   Observable<List<Article>> get favoriteArticles => _favoriteArticles.stream;
 
   void init() {
+    user = rootBloc.user.value;
     _loading = BehaviorSubject<bool>();
     _myArticles = BehaviorSubject<List<Article>>(seedValue: []);
     _favoriteArticles = BehaviorSubject<List<Article>>(seedValue: []);
@@ -33,7 +38,7 @@ class ProfileBloc {
   Future<bool> fetchMyArticles() async {
     _loading.sink.add(true);
     try {
-      Response result = await ArticlesService.byAuthor('dannlks');
+      Response result = await ArticlesService.byAuthor(user.username);
       print(result.data["articles"]);
       var articles = result.data["articles"]
           .map((article) => Article.fromJson(article))
@@ -51,7 +56,7 @@ class ProfileBloc {
   Future<bool> fetchFavoriteArticles() async {
     _loading.sink.add(true);
     try {
-      Response result = await ArticlesService.favoritedBy('dannlks');
+      Response result = await ArticlesService.favoritedBy(user.username);
       print(result.data["articles"]);
       var articles = result.data["articles"]
           .map((article) => Article.fromJson(article))

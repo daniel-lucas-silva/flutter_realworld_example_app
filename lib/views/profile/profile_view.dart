@@ -67,9 +67,11 @@ class _ProfileViewState extends State<ProfileView> {
                 left: 10,
                 child: Row(
                   children: <Widget>[
-                    CircleAvatar(),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage("${(profileBloc.user.image.isEmpty ?? true ) ? "https://static.productionready.io/images/smiley-cyrus.jpg": profileBloc.user.image}"),
+                    ),
                     SizedBox(width: 10),
-                    Text("dannlks")
+                    Text("${profileBloc.user.username}")
                   ],
                 ),
               ),
