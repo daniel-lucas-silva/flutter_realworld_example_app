@@ -9,14 +9,18 @@ import 'articles_card.dart';
 class ArticlesView extends StatelessWidget {
 
   final List<Article> _items;
+  final overlapInjector;
+  String pageKey = "articles";
 
-  ArticlesView(this._items);
+  ArticlesView(this._items, { this.pageKey, this.overlapInjector });
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      key: PageStorageKey<String>(pageKey),
       physics: BouncingScrollPhysics(),
       slivers: <Widget>[
+        overlapInjector ?? SliverToBoxAdapter(),
         SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

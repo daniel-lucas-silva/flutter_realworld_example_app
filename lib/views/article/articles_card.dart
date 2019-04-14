@@ -45,7 +45,7 @@ class ArticleCard extends StatelessWidget {
                       radius: 20.0,
                       backgroundColor: Colors.grey[700],
                       backgroundImage:
-                          NetworkImage("${article.author?.image ?? ""}"),
+                          NetworkImage("${(article.author?.image.isEmpty ?? true ) ? "https://static.productionready.io/images/smiley-cyrus.jpg": article.author.image}"),
                     ),
                   ),
                   Expanded(
