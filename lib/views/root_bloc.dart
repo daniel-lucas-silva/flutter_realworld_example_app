@@ -14,7 +14,7 @@ class RootBloc {
 
   Observable<bool> get loading => _loading.stream;
   ValueObservable<bool> get authenticated => _authenticated.stream;
-  Stream<User> get user => _user.stream;
+  ValueObservable<User> get user => _user.stream;
 
   void initState() {
     _loading = BehaviorSubject<bool>(seedValue: false);
