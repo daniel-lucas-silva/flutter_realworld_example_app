@@ -23,8 +23,8 @@ class _ArticleDetailState extends State<ArticleDetail> {
   @override
   void initState() {
     _commentBloc = CommentBloc();
-    _commentBloc.init();
-    _commentBloc.load(widget.article.slug); 
+    _commentBloc.init(slug: widget.article.slug);
+    _commentBloc.load(); 
     super.initState();
   }
 
