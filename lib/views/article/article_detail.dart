@@ -89,7 +89,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 children: <Widget>[
                   CircleAvatar(
                     radius: 24.0,
-                    backgroundImage: NetworkImage("${(widget.article.author?.image.isEmpty ?? true ) ? "https://static.productionready.io/images/smiley-cyrus.jpg": widget.article.author.image}"),
+                    backgroundImage: NetworkImage("${widget.article.author.image}"),
                   ),
                   VerticalDivider(),
                   Expanded(

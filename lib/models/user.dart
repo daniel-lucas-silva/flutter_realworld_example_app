@@ -10,7 +10,7 @@ class User {
       : username = json['username'],
         email = json['email'],
         bio = json['bio'],
-        image = json['image'];
+        image = json['image'].isEmpty ? "https://static.productionready.io/images/smiley-cyrus.jpg" : json['image'];
 
   Map<String, dynamic> toJson() => {
         'username': username,

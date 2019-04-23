@@ -9,7 +9,7 @@ class Author {
   Author.fromJson(Map<String, dynamic> json)
       : username = json['username'],
         bio = json['bio'],
-        image = json['image'],
+        image = json['image'].isEmpty ? "https://static.productionready.io/images/smiley-cyrus.jpg" : json['image'],
         following = json['following'];
 
   Map<String, dynamic> toJson() => {
