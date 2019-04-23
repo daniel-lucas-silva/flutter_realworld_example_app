@@ -1,4 +1,4 @@
-package com.example.realworld;
+package dev.d92.realworld;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
