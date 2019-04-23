@@ -10,9 +10,9 @@ class ArticlesView extends StatelessWidget {
 
   final List<Article> _items;
   final overlapInjector;
-  String pageKey = "articles";
+  final String pageKey;
 
-  ArticlesView(this._items, { this.pageKey, this.overlapInjector });
+  ArticlesView(this._items, { this.pageKey: "articles", this.overlapInjector });
 
   @override
   Widget build(BuildContext context) {

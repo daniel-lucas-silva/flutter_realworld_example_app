@@ -18,9 +18,7 @@ class HomeView extends StatefulWidget {
   _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView>
-    with SingleTickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
 
   PageController _tabController;
   int _index;

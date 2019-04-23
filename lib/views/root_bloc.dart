@@ -6,6 +6,8 @@ import 'package:realworld/services/auth.service.dart';
 import 'package:realworld/utils/storage.dart';
 import 'package:rxdart/rxdart.dart';
 
+export 'package:realworld/models/user.dart';
+
 class RootBloc {
 
   BehaviorSubject<bool> _loading;

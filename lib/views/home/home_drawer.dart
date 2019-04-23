@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:realworld/models/user.dart';
 import 'package:realworld/utils/navigate.dart';
-import 'package:realworld/utils/theme.dart';
 import 'package:realworld/views/auth/register_view.dart';
 import 'package:realworld/views/login_dialog.dart';
 import 'package:realworld/views/root_bloc.dart';
@@ -111,8 +110,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                     ),
                   ],
                   currentAccountPicture: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "${snapshot.data.image.isNotEmpty ? snapshot.data.image : 'https://static.productionready.io/images/smiley-cyrus.jpg'}"),
+                    backgroundImage: NetworkImage("${snapshot.data.image}"),
                     backgroundColor: Colors.grey[800],
                   ),
                   decoration: BoxDecoration(color: Colors.blueGrey[900]),
