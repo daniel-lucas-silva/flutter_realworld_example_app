@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:realworld/utils/navigate.dart';
 import 'package:realworld/utils/theme.dart';
+import 'package:realworld/views/settings/settings_view.dart';
 
 import 'favorite_articles.dart';
 import 'my_articles.dart';
@@ -79,7 +81,9 @@ class _ProfileViewState extends State<ProfileView> {
                 bottom: 65,
                 right: 10,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    push(context, SettingsView());
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey[600]),

@@ -59,13 +59,15 @@ class _SettingsFormState extends State<SettingsForm> {
     );
   }
 
-  Widget _textField(
-      {String hint,
-      TextInputType keyboardType: TextInputType.text,
-      Function(String) validator,
-      Function onSaved,
-      String initialValue,
-      int maxLines: 1}) {
+  Widget _textField({
+    String hint,
+    TextInputType keyboardType: TextInputType.text,
+    Function(String) validator,
+    Function onSaved,
+    String initialValue,
+    int maxLines: 1,
+    bool obscureText: false,
+  }) {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
       child: TextFormField(
@@ -75,6 +77,7 @@ class _SettingsFormState extends State<SettingsForm> {
         validator: validator,
         onSaved: onSaved,
         initialValue: initialValue,
+        obscureText: obscureText,
       ),
     );
   }
@@ -91,7 +94,7 @@ class _SettingsFormState extends State<SettingsForm> {
   void _onSubmit() async {
     final FormState form = _formKey.currentState;
 
-    if (form.validate()){
+    if (form.validate()) {
       form.save();
       _bloc.save(_modelView.toMap()).then((_) async {
         Scaffold.of(context).showSnackBar(
