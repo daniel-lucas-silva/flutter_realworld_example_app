@@ -5,7 +5,7 @@ class AuthService {
 
   static register(data) async => await http.post('/users', data: data);
 
-  static update(data) async => await http.put('/users', data: data);
+  static update(data) async => await http.put('/user', data: data);
 
   static current() async => await http.get('/user');
 }

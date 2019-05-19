@@ -8,12 +8,7 @@ import 'package:realworld/utils/storage.dart';
 import 'package:realworld/views/root_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-class LoginBloc {
-// image
-// username
-// bio
-// email
-
+class SettingsBloc {
   BehaviorSubject<bool> _loading;
 
   Observable<bool> get loading => _loading.stream;
@@ -26,11 +21,22 @@ class LoginBloc {
     _loading.close();
   }
 
-  Future<bool> login(data) async {
+  Future<bool> save(data) async {
     _loading.sink.add(true);
 
     try {
-      Response response = await AuthService.login(data);
+      Response response = await AuthService.update(data);
+
+      final String token = response.data['user']['token'];
+
+      http.dio.options.headers = {'Authorization': 'Token $token'};
+
+      await storage.write(
+        key: "token",
+        value: token,
+      );
+
+      rootBloc.setUser(User.fromJson(response.data['user']));
 
       _loading.sink.add(false);
       return true;
@@ -41,4 +47,22 @@ class LoginBloc {
   }
 }
 
-final LoginBloc loginBloc = new LoginBloc();
+class SettingsModelView {
+  String image;
+  String username;
+  String bio;
+  String email;
+
+  Map<String, dynamic> toMap() {
+    return {
+      "user": {
+        "image": this.image,
+        "username": this.username,
+        "bio": this.bio,
+        "email": this.email,
+      }
+    };
+  }
+}
+
+final SettingsBloc settingsBloc = new SettingsBloc();
