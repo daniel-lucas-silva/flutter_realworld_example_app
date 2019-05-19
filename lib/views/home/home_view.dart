@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realworld/utils/navigate.dart';
 import 'package:realworld/utils/theme.dart';
 import 'package:realworld/views/login_dialog.dart';
+import 'package:realworld/views/post/post_view.dart';
 import 'package:realworld/views/profile/profile_view.dart';
 import 'package:realworld/views/root_bloc.dart';
 // components
@@ -55,7 +56,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
         builder: (context, AsyncSnapshot<bool> snapshot) {
           return snapshot.data
               ? FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    push(context, PostView());
+                  },
                   child: Icon(Icons.create),
                   backgroundColor: RwColors.green,
                   mini: true,
