@@ -44,6 +44,7 @@ ThemeData rwTheme = ThemeData(
   accentColor: RwColors.grey,
   // fontFamily: '',
   textTheme: TextTheme(
+    button: TextStyle(color: Colors.white),
     headline: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
     title: TextStyle(fontSize: 26.0, fontWeight: FontWeight.w600),
     subhead: TextStyle(fontSize: 14.0),
@@ -67,7 +68,7 @@ ThemeData rwTheme = ThemeData(
   ),
   buttonTheme: ButtonThemeData(
     buttonColor: RwColors.green,
-    textTheme: ButtonTextTheme.primary,
+    textTheme: ButtonTextTheme.normal,
     layoutBehavior: ButtonBarLayoutBehavior.padded,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(5.0),
@@ -79,11 +80,10 @@ ThemeData rwTheme = ThemeData(
       borderRadius: BorderRadius.circular(7.0),
     ),
     titleTextStyle: TextStyle(
-      fontSize: 28,
-      fontFamily: "Titillium",
-      fontWeight: FontWeight.w600,
-      color: RwColors.grey[800]
-    ),
+        fontSize: 28,
+        fontFamily: "Titillium",
+        fontWeight: FontWeight.w600,
+        color: RwColors.grey[800]),
   ),
 );
 
